@@ -1,0 +1,6 @@
+@Proiect_Adapost_HostAddress = http://localhost:5187
+
+GET {{Proiect_Adapost_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
