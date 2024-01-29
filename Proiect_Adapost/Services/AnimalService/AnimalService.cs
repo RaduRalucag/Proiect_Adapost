@@ -1,9 +1,9 @@
 ﻿using Proiect_Adapost.Models.Animal;
 using Proiect_Adapost.Repositories.AnimalRepository;
 
-namespace Proiect_Adapost.Services
+namespace Proiect_Adapost.Services.AnimalService
 {
-    public class AnimalService: IAnimalService
+    public class AnimalService : IAnimalService
     {
         private readonly IAnimalRepository _animalRepository;
 
@@ -35,6 +35,12 @@ namespace Proiect_Adapost.Services
                 await _animalRepository.CreateAsync(animal);
 
             }
+            await _animalRepository.SaveAsync();
+        }
+
+        public async Task DeleteAnimal(Animal animal)
+        {
+            _animalRepository.Delete(animal);
             await _animalRepository.SaveAsync();
         }
 

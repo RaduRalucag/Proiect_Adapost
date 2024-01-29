@@ -5,5 +5,7 @@
         public string Tip { get; set; }
         public string Rasa { get; set; }
         public string Culoare { get; set; }
+
+        public Guid Id { get; set; }
     }
 }

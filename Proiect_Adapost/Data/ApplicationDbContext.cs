@@ -2,6 +2,7 @@
 using Proiect_Adapost.Models.Adapost;
 using Proiect_Adapost.Models.Orase;
 using Proiect_Adapost.Models.Animal;
+using Proiect_Adapost.Models.Carnet_sanatate;
 
 namespace Proiect_Adapost.Data
 {
@@ -10,6 +11,7 @@ namespace Proiect_Adapost.Data
         public DbSet<Adapost> Adaposts { get; set; }
         public DbSet<Oras> Orase { get; set; }
         public DbSet<Animal> Animale { get; set; }
+        public DbSet<Carnet_sanatate> Carnete_sanatate { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

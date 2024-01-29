@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Proiect_Adapost.Models.Animal;
 using Proiect_Adapost.Models.Animal.Dto;
-using Proiect_Adapost.Services;
+using Proiect_Adapost.Services.AnimalService;
 
 namespace Proiect_Adapost.Controllers
 {
@@ -19,7 +19,7 @@ namespace Proiect_Adapost.Controllers
             _animalService = animalService;
         }
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AnimalResponseDto>>> GetBooks()
+        public async Task<ActionResult<IEnumerable<AnimalResponseDto>>> GetAllAnimals()
         {
             var animals = await _animalService.GetAllAnimals();
             var animalsResponseDto = _mapper.Map<IEnumerable<AnimalResponseDto>>(animals);
@@ -38,6 +38,16 @@ namespace Proiect_Adapost.Controllers
         public async Task<ActionResult<AnimalResponseDto>> GetAnimal(Guid id)
         {
             var animal = await _animalService.GetAnimal(id);
+            var animalResponseDto = _mapper.Map<AnimalResponseDto>(animal);
+            return Ok(animalResponseDto);
+        }
+
+     
+        [HttpDelete("{id:guid}")]
+        public async Task<ActionResult<AnimalResponseDto>> DeleteAnimal(Guid id)
+        {
+            var animal = await _animalService.GetAnimal(id);
+            await _animalService.DeleteAnimal(animal);
             var animalResponseDto = _mapper.Map<AnimalResponseDto>(animal);
             return Ok(animalResponseDto);
         }

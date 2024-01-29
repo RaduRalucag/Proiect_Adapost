@@ -4,7 +4,9 @@ using Proiect_Adapost.Repositories.OrasRepository;
 using Proiect_Adapost.Services.AdapostService;
 using Proiect_Adapost.Services.OrasService;
 using Proiect_Adapost.Repositories.AnimalRepository;
-using Proiect_Adapost.Services;
+using Proiect_Adapost.Services.AnimalService;
+using Proiect_Adapost.Repositories.Carnet_sanatateRepository;
+using Proiect_Adapost.Services.Carnet_sanatateService;
 
 namespace Examen.Helpers.Extensions
 {
@@ -12,7 +14,8 @@ namespace Examen.Helpers.Extensions
     {
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            //services.AddTransient<IRepository, Repository>();
+            //services.AddTransient<IRepository, Repository>() 
+            services.AddTransient<ICarnet_sanatateRepository, Carnet_sanatateRepository>();
             services.AddTransient<IAdapostRepository, AdapostRepository>();
             services.AddTransient<IOrasRepository, OrasRepository>();
             services.AddTransient<IAnimalRepository, AnimalRepository>();
@@ -22,6 +25,7 @@ namespace Examen.Helpers.Extensions
         public static IServiceCollection AddServices(this IServiceCollection services)
         {
             //services.AddTransient<IService,Service>();
+            services.AddTransient<ICarnet_sanatateService, Carnet_sanatateService>();
             services.AddTransient<Proiect_Adapost.Services.AdapostService.IAdapostService, AdapostService>();
             services.AddTransient<Proiect_Adapost.Services.OrasService.IOrasService, OrasService>();
             services.AddTransient<IAnimalService, AnimalService>();

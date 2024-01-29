@@ -12,6 +12,7 @@ namespace Proiect_Adapost.Helpers
         public MapperProfile()
         {
             // CreateMap<Source, Destination>();
+            CreateMap<Animal, AnimalResponseDto>();
             CreateMap<AnimalRequestDto, Animal>();
             CreateMap<Adapost, AdapostRequestDto>();
             CreateMap<AdapostRequestDto, Adapost>();
