@@ -6,7 +6,5 @@ namespace Proiect_Adapost.Models.Adapost
     {
         public string Nume { get; set; }
         public string Locatie { get; set; }
-        public int NrAnimale { get; set; }
-
     }
 }

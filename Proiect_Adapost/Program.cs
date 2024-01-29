@@ -1,9 +1,14 @@
 using Examen.Helpers.Extensions;
+using Microsoft.EntityFrameworkCore;
+using Proiect_Adapost.Data;
+using Proiect_Adapost.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddAutoMapper(typeof(MapperProfile));
 builder.Services.AddControllers();
 builder.Services.AddRepositories();
 builder.Services.AddServices();

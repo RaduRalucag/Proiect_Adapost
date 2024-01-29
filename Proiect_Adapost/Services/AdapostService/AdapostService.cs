@@ -1,46 +1,42 @@
 ﻿using AutoMapper;
 using Proiect_Adapost.Data;
 using Proiect_Adapost.Models.Adapost;
+using Proiect_Adapost.Repositories.AdapostRepository;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace Proiect_Adapost.Services.AdapostService
 {
     public class AdapostService : IAdapostService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IAdapostRepository _adapostRepository;
         private readonly IMapper _mapper;
 
-        public AdapostService(ApplicationDbContext context, IMapper mapper)
-        {
-            _context = context;
+        public AdapostService(IAdapostRepository repository, IMapper mapper)
+        { 
+            _adapostRepository = repository;
             _mapper = mapper;
-        }
-
-        public async Task CreateAllAdapost(IList<Adapost> adaposts)
-        {
-            await _context.Adaposts.AddRangeAsync(adaposts);
-            await _context.SaveChangesAsync();
         }
 
         public async Task CreateAdapost(Adapost adapost)
         {
-            await _context.Adaposts.AddAsync(adapost);
-            await _context.SaveChangesAsync();
+            await _adapostRepository.CreateAsync(adapost);
+            await _adapostRepository.SaveAsync();
         }
 
         public async Task DeleteAdapost(Adapost adapost)
         {
-            _context.Adaposts.Remove(adapost);
-            await _context.SaveChangesAsync();
+            _adapostRepository.Delete(adapost);
+            await _adapostRepository.SaveAsync();
         }
 
         public async Task<Adapost> GetAdapostById(Guid id)
         {
-            return await _context.Adaposts.FirstOrDefaultAsync(adapost => adapost.Id == id);
+            return await _adapostRepository.FindByIdAsync(id);
         }
 
         public async Task<List<Adapost>> GetAdaposts()
         {
-            return await _context.Adaposts.ToListAsync();
-        }   
+            return (List<Adapost>)await _adapostRepository.GetAllAsync();
+    }   
     }
 }
