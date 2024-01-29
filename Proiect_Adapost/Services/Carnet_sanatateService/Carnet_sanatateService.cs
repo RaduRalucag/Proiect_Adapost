@@ -1,4 +1,5 @@
-﻿using Proiect_Adapost.Models.Carnet_sanatate;
+﻿using Proiect_Adapost.Models.Adapost;
+using Proiect_Adapost.Models.Carnet_sanatate;
 using Proiect_Adapost.Models.Carnet_sanatate.Dto;
 using Proiect_Adapost.Repositories.Carnet_sanatateRepository;
 
@@ -39,8 +40,9 @@ namespace Proiect_Adapost.Services.Carnet_sanatateService
             return await _carnet_sanatateRepository.FindByIdAsync(id);
         }
 
-
-
-
+        public async Task<Carnet_sanatate> GetAnimal(Guid id)
+        {
+            return await _carnet_sanatateRepository.FindByIdAsync(id);
+        }
     }
 }

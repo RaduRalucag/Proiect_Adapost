@@ -19,6 +19,12 @@ namespace Proiect_Adapost.Data
         }
             protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+           
+            modelBuilder.Entity<Animal>()
+                .HasOne(a => a.Carnet_sanatate)
+                .WithOne(c => c.Animal)
+                .HasForeignKey<Carnet_sanatate>(c => c.AnimalId);
+
 
             modelBuilder.Entity<Adapost>()
                 .HasIndex(a => a.Nume)

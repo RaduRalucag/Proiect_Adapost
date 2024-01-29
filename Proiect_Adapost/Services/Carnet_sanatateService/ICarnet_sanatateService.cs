@@ -1,4 +1,5 @@
-﻿using Proiect_Adapost.Models.Carnet_sanatate;
+﻿using Proiect_Adapost.Models.Adapost;
+using Proiect_Adapost.Models.Carnet_sanatate;
 
 namespace Proiect_Adapost.Services.Carnet_sanatateService
 {
@@ -8,6 +9,7 @@ namespace Proiect_Adapost.Services.Carnet_sanatateService
         Task CreateCarnet_sanatate(Carnet_sanatate carnet_sanatate);
         Task DeleteCarnet_sanatate(Carnet_sanatate carnet_sanatate);
         Task<Carnet_sanatate> GetCarnet_sanatateById(Guid id);
+        Task<Carnet_sanatate> GetAnimal(Guid id);
 
     }
 }
