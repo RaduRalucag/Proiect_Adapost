@@ -1,0 +1,9 @@
+﻿namespace Proiect_Adapost.Models.Animal.Dto
+{
+    public class AnimalRequestDto
+    {
+        public string Tip { get; set; }
+        public string Rasa { get; set; }
+        public string Culoare { get; set; }
+    }
+}
