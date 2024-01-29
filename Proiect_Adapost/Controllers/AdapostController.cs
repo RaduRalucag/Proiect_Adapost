@@ -20,35 +20,43 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<AdapostResponseDto>> GetAdaposts()
+        public async Task<ActionResult<AdapostRequestDto>> GetAdaposts()
         {
             var adaposts = await _adapostService.GetAdaposts();
             return Ok(adaposts);
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<ActionResult<AdapostResponseDto>> GetAdapostById(Guid id)
+        public async Task<ActionResult<AdapostRequestDto>> GetAdapostById(Guid id)
         {
-            var adapost = await _adapostService.GetAdapostById(id);
+            var adapost = await _adapostService.GetOrasById(id);
             return Ok(adapost);
         }
 
         [HttpPost]
-        public async Task<ActionResult<AdapostResponseDto>> CreateAdapost(AdapostRequestDto adapost)
+        public async Task<ActionResult<AdapostRequestDto>> CreateAdapost(AdapostRequestDto adapost)
         {
             var _adapost = _mapper.Map<Adapost>(adapost);
             await _adapostService.CreateAdapost(_adapost);
-            var _adapostDTO = _mapper.Map<AdapostResponseDto>(_adapost);
+            var _adapostDTO = _mapper.Map<AdapostRequestDto>(_adapost);
             return Ok(_adapostDTO);
         }  
 
         [HttpDelete("{id:guid}")]
-        public async Task<ActionResult<AdapostResponseDto>> DeleteAdapost(Guid id)
+        public async Task<ActionResult<AdapostRequestDto>> DeleteAdapost(Guid id)
         {
-            var adapost = await _adapostService.GetAdapostById(id);
+            var adapost = await _adapostService.GetOrasById(id);
             await _adapostService.DeleteAdapost(adapost);
-            var _adapostDTO = _mapper.Map<AdapostResponseDto>(adapost);
+            var _adapostDTO = _mapper.Map<AdapostRequestDto>(adapost);
             return Ok(_adapostDTO);
         }
+
+        [HttpGet("oras/{id:guid}")]
+        public async Task<ActionResult<AdapostRequestDto>> GetAdapostsByOras(Guid id)
+        {
+            var adaposts = await _adapostService.GetAdapostsByOras(id);
+            return Ok(adaposts);
+        }
+
     }
 }

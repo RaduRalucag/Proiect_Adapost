@@ -6,8 +6,8 @@ namespace Proiect_Adapost.Services.AdapostService
     {
         Task CreateAdapost(Adapost adapost);
         Task DeleteAdapost(Adapost adapost);
-        Task<Adapost> GetAdapostById(Guid id);
+        Task<Adapost> GetOrasById(Guid id);
         Task<List<Adapost>> GetAdaposts();
-        
+        Task<List<Adapost>> GetAdapostsByOras(Guid id);
     }
 }

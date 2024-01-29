@@ -2,7 +2,6 @@
 using Proiect_Adapost.Data;
 using Proiect_Adapost.Models.Adapost;
 using Proiect_Adapost.Repositories.AdapostRepository;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace Proiect_Adapost.Services.AdapostService
 {
@@ -29,7 +28,7 @@ namespace Proiect_Adapost.Services.AdapostService
             await _adapostRepository.SaveAsync();
         }
 
-        public async Task<Adapost> GetAdapostById(Guid id)
+        public async Task<Adapost> GetOrasById(Guid id)
         {
             return await _adapostRepository.FindByIdAsync(id);
         }
@@ -37,6 +36,10 @@ namespace Proiect_Adapost.Services.AdapostService
         public async Task<List<Adapost>> GetAdaposts()
         {
             return (List<Adapost>)await _adapostRepository.GetAllAsync();
-    }   
+        }
+        public async Task<List<Adapost>> GetAdapostsByOras(Guid id)
+        {
+            return (List<Adapost>)await _adapostRepository.GetAdapostsByOras(id);
+        }
     }
 }
