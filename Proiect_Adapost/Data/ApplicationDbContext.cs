@@ -8,5 +8,7 @@ namespace Proiect_Adapost.Data
             : base(options)
         {
         }
+
+        public object Adaposts { get; internal set; }
     }
 }
