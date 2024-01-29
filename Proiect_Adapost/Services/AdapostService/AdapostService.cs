@@ -43,9 +43,5 @@ namespace Proiect_Adapost.Services.AdapostService
         {
             return (List<Adapost>)await _adapostRepository.GetAllAsync();
         }
-        public async Task<List<Adapost>> GetAdapostsByOras(Guid id)
-        {
-            return (List<Adapost>)await _adapostRepository.GetAdapostsByOras(id);
-        }
     }
 }

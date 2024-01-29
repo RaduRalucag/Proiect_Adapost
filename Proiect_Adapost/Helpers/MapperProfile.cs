@@ -12,7 +12,7 @@ namespace Proiect_Adapost.Helpers
             // CreateMap<Source, Destination>();
             CreateMap<Adapost, AdapostResponseDto>();
             CreateMap<AdapostRequestDto, Adapost>();
-            CreateMap<Oras, OrasDto>()
+            CreateMap<Oras, OrasResponseDto>()
                 .ForMember(dest => dest.NumeAdaposturi, opt => opt.MapFrom(src => src.Adaposts.Select(a => a.Nume)));
             CreateMap<OrasRequestDto, Oras>();
         }

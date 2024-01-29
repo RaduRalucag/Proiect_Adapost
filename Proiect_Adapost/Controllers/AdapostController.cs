@@ -51,12 +51,5 @@ namespace Proiect_Adapost.Controllers
             return Ok(_adapostDTO);
         }
 
-        [HttpGet("oras/{id:guid}")]
-        public async Task<ActionResult<AdapostResponseDto>> GetAdapostsByOras(Guid id)
-        {
-            var adaposts = await _adapostService.GetAdapostsByOras(id);
-            return Ok(adaposts);
-        }
-
     }
 }
