@@ -10,10 +10,11 @@ namespace Proiect_Adapost.Helpers
         public MapperProfile()
         {
             // CreateMap<Source, Destination>();
-            CreateMap<Adapost, AdapostRequestDto>();
+            CreateMap<Adapost, AdapostResponseDto>();
             CreateMap<AdapostRequestDto, Adapost>();
-            CreateMap<Oras, OrasDto>();
-            CreateMap<OrasDto, Oras>();
+            CreateMap<Oras, OrasDto>()
+                .ForMember(dest => dest.NumeAdaposturi, opt => opt.MapFrom(src => src.Adaposts.Select(a => a.Nume)));
+            CreateMap<OrasRequestDto, Oras>();
         }
     }
 }

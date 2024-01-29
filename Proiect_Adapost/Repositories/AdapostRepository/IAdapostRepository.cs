@@ -6,5 +6,6 @@ namespace Proiect_Adapost.Repositories.AdapostRepository
     public interface IAdapostRepository : IGenericRepository<Adapost>
     {
         Task<List<Adapost>> GetAdapostsByOras(Guid id);
+        
     }
 }

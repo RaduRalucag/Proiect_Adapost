@@ -32,12 +32,13 @@ namespace Proiect_Adapost.Controllers
             [HttpGet("{id:guid}")]
             public async Task<ActionResult<OrasDto>> GetOrasById(Guid id)
             {
-                var adapost = await _orasService.GetOrasById(id);
-                return Ok(adapost);
+                var oras = await _orasService.GetOrasById(id);
+                var orasDTO = _mapper.Map<OrasDto>(oras);
+                return Ok(orasDTO);
             }
 
             [HttpPost]
-            public async Task<ActionResult<OrasDto>> CreateOras(OrasDto oras)
+            public async Task<ActionResult<OrasDto>> CreateOras(OrasRequestDto oras)
             {
                 var _oras = _mapper.Map<Oras>(oras);
                 await _orasService.CreateOras(_oras);

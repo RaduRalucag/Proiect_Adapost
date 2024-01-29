@@ -26,12 +26,13 @@ namespace Proiect_Adapost.Services.OrasService
         }
         public async Task<Oras> GetOrasById(Guid id)
         {
-            return await _orasRepository.FindByIdAsync(id);
+            return await _orasRepository.GetOrasById(id);
         }
 
-        public async Task<List<Oras>> GetOrase()
+        public async Task<IEnumerable<Oras>> GetOrase()
         {
-            return (List<Oras>)await _orasRepository.GetAllAsync();
+            
+            return await _orasRepository.GetAllOraseAsync();
         }
     }
 }
