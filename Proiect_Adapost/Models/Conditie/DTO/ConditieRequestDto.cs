@@ -2,7 +2,7 @@
 {
     public class ConditieRequestDto
     {
-        public string Nume { get; set; }
-        public string Descriere { get; set; }
+        public string Denumire { get; set; }
+        public string Gravitate { get; set; }
     }
 }

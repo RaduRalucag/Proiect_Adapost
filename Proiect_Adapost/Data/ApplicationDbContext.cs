@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Proiect_Adapost.Models.Adapost;
+using Proiect_Adapost.Models.Arhiva;
 using Proiect_Adapost.Models.Conditie;
 using Proiect_Adapost.Models.Orase;
 
@@ -31,6 +32,16 @@ namespace Proiect_Adapost.Data
                 .HasOne(a => a.Conditie)
                 .WithOne(c => c.Adapost)
                 .HasForeignKey<Conditie>(c => c.AdapostId);
+
+            modelBuilder.Entity<Arhiva>()
+                .HasMany(c => c.Control)
+                .WithOne(c => c.Arhiva)
+                .HasForeignKey(c => c.ArhivaId);
+
+            modelBuilder.Entity<Conditie>()
+                .HasMany(c => c.Control)
+                .WithOne(c => c.Conditie)
+                .HasForeignKey(c => c.ConditieId);
 
             base.OnModelCreating(modelBuilder);
         }

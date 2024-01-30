@@ -3,6 +3,8 @@ using Proiect_Adapost.Models.Adapost;
 using Proiect_Adapost.Models.Adapost.DTO;
 using Proiect_Adapost.Models.Conditie;
 using Proiect_Adapost.Models.Conditie.DTO;
+using Proiect_Adapost.Models.Control;
+using Proiect_Adapost.Models.Control.DTO;
 using Proiect_Adapost.Models.Oras.DTO;
 using Proiect_Adapost.Models.Orase;
 namespace Proiect_Adapost.Helpers
@@ -19,6 +21,8 @@ namespace Proiect_Adapost.Helpers
             CreateMap<OrasRequestDto, Oras>();
             CreateMap<Conditie, ConditieResponseDto>();
             CreateMap<ConditieRequestDto, Conditie>();
+            CreateMap<Control, ControlResponseDto>();
+            CreateMap<ControlRequestDto, Control>();
         }
     }
 }

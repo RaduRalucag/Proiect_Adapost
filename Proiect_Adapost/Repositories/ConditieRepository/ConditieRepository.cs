@@ -14,7 +14,7 @@ namespace Proiect_Adapost.Repositories.ConditieRepository
         public async Task<Conditie> GetConditieById(Guid conditieId)
         {
             return await _table
-                .Include(c => c.Adapost)
+                .Include(c => c.Control)
                 .FirstOrDefaultAsync(c => c.Id == conditieId);
         }
     }
