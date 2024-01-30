@@ -25,7 +25,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Carnet_sanatateRequestDto>>> GetAllCarnet_sanatate()
+        public async Task<ActionResult<IEnumerable<Carnet_sanatateResponseDto>>> GetAllCarnet_sanatate()
         {
             var carnete_sanatate = await _carnet_sanatateService.GetAllCarnet_sanatate();
             var carnet_sanatateResponseDto = _mapper.Map<IEnumerable<Carnet_sanatateResponseDto>>(carnete_sanatate);
@@ -33,18 +33,19 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<ActionResult<Carnet_sanatateRequestDto>> GetCarnet_sanatateById(Guid id)
+        public async Task<ActionResult<Carnet_sanatateResponseDto>> GetCarnet_sanatateById(Guid id)
         {
             var carnete_sanatate = await _carnet_sanatateService.GetAnimal(id);
             return Ok(carnete_sanatate);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Carnet_sanatateRequestDto>> CreateCarnet_sanatate(Carnet_sanatateRequestDto carnet_sanatate)
+        [HttpPost("animal/{animalId:guid}")]
+        public async Task<ActionResult<Carnet_sanatateResponseDto>> CreateCarnet_sanatate(Guid animalId, Carnet_sanatateRequestDto carnet_sanatate)
         {
             var _carnet_sanatate = _mapper.Map<Carnet_sanatate>(carnet_sanatate);
+            _carnet_sanatate.AnimalId = animalId;
             await _carnet_sanatateService.CreateCarnet_sanatate(_carnet_sanatate);
-            var _carnet_sanatateDTO = _mapper.Map<Carnet_sanatateRequestDto>(_carnet_sanatate);
+            var _carnet_sanatateDTO = _mapper.Map<Carnet_sanatateResponseDto>(_carnet_sanatate);
             return Ok(_carnet_sanatateDTO);
         }
 

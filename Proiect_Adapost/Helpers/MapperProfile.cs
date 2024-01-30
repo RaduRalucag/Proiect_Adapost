@@ -5,6 +5,8 @@ using Proiect_Adapost.Models.Oras.DTO;
 using Proiect_Adapost.Models.Orase;
 using Proiect_Adapost.Models.Animal;
 using Proiect_Adapost.Models.Animal.Dto;
+using Proiect_Adapost.Models.Carnet_sanatate;
+using Proiect_Adapost.Models.Carnet_sanatate.Dto;
 namespace Proiect_Adapost.Helpers
 {
     public class MapperProfile: Profile
@@ -18,6 +20,8 @@ namespace Proiect_Adapost.Helpers
             CreateMap<AdapostRequestDto, Adapost>();
             CreateMap<Oras, OrasDto>();
             CreateMap<OrasDto, Oras>();
+            CreateMap<Carnet_sanatate, Carnet_sanatateResponseDto>();
+            CreateMap<Carnet_sanatateRequestDto, Carnet_sanatate>();
         }
        
     
