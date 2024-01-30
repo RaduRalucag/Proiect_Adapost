@@ -29,7 +29,7 @@ namespace Proiect_Adapost.Controllers
         {
             var carnete_sanatate = await _carnet_sanatateService.GetAllCarnet_sanatate();
             var carnet_sanatateResponseDto = _mapper.Map<IEnumerable<Carnet_sanatateResponseDto>>(carnete_sanatate);
-            return Ok(carnete_sanatate);
+            return Ok(carnet_sanatateResponseDto);
         }
 
         [HttpGet("{id:guid}")]
@@ -43,8 +43,7 @@ namespace Proiect_Adapost.Controllers
         public async Task<ActionResult<Carnet_sanatateResponseDto>> CreateCarnet_sanatate(Guid animalId, Carnet_sanatateRequestDto carnet_sanatate)
         {
             var _carnet_sanatate = _mapper.Map<Carnet_sanatate>(carnet_sanatate);
-            _carnet_sanatate.AnimalId = animalId;
-            await _carnet_sanatateService.CreateCarnet_sanatate(_carnet_sanatate);
+            await _carnet_sanatateService.CreateCarnet_sanatate(animalId, _carnet_sanatate);
             var _carnet_sanatateDTO = _mapper.Map<Carnet_sanatateResponseDto>(_carnet_sanatate);
             return Ok(_carnet_sanatateDTO);
         }

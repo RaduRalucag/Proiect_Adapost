@@ -20,8 +20,10 @@ namespace Proiect_Adapost.Helpers
             CreateMap<AdapostRequestDto, Adapost>();
             CreateMap<Oras, OrasDto>();
             CreateMap<OrasDto, Oras>();
-            CreateMap<Carnet_sanatate, Carnet_sanatateResponseDto>();
+            CreateMap<Carnet_sanatate, Carnet_sanatateResponseDto>()
+                .ForMember(dest => dest.numeAnimal, opt => opt.MapFrom(src => src.Animal.Nume));
             CreateMap<Carnet_sanatateRequestDto, Carnet_sanatate>();
+            
         }
        
     

@@ -5,5 +5,7 @@
         public string Vaccin { get; set; }
         public string Varsta { get; set; }
         public Guid Id { get; set; }
+
+        public string numeAnimal { get; set; }
     }
 }
