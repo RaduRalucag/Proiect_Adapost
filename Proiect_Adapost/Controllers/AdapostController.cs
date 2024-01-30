@@ -29,15 +29,15 @@ namespace Proiect_Adapost.Controllers
         [HttpGet("{id:guid}")]
         public async Task<ActionResult<AdapostResponseDto>> GetAdapostById(Guid id)
         {
-            var adapost = await _adapostService.GetOrasById(id);
+            var adapost = await _adapostService.GetAdapostById(id);
             return Ok(adapost);
         }
 
-        [HttpPost("oras/{orasId:guid}")]
-        public async Task<ActionResult<AdapostResponseDto>> CreateAdapost(AdapostRequestDto adapost, Guid orasId)
+        [HttpPost("oras/{orasId:guid},conditie/{conditieId:guid}")]
+        public async Task<ActionResult<AdapostResponseDto>> CreateAdapost(AdapostRequestDto adapost, Guid orasId, Guid conditieId)
         {
             var _adapost = _mapper.Map<Adapost>(adapost);
-            await _adapostService.CreateAdapost(_adapost, orasId);
+            await _adapostService.CreateAdapost(_adapost, orasId, conditieId);
             var _adapostDTO = _mapper.Map<AdapostResponseDto>(_adapost);
             return Ok(_adapostDTO);
         }  
@@ -45,7 +45,7 @@ namespace Proiect_Adapost.Controllers
         [HttpDelete("{id:guid}")]
         public async Task<ActionResult<AdapostResponseDto>> DeleteAdapost(Guid id)
         {
-            var adapost = await _adapostService.GetOrasById(id);
+            var adapost = await _adapostService.GetAdapostById(id);
             await _adapostService.DeleteAdapost(adapost);
             var _adapostDTO = _mapper.Map<AdapostResponseDto>(adapost);
             return Ok(_adapostDTO);

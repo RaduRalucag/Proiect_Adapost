@@ -7,6 +7,9 @@ namespace Proiect_Adapost.Models.Adapost
         public string Nume { get; set; }
         public string Locatie { get; set; }
         public Guid OrasId { get; set; }
-        public Orase.Oras Oras { get; set; }
+        public Orase.Oras? Oras { get; set; }
+        public Guid ConditieId { get; set; }
+        public Conditie.Conditie? Conditie { get; set; }
+
     }
 }

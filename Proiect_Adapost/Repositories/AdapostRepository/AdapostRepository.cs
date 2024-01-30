@@ -8,10 +8,15 @@ namespace Proiect_Adapost.Repositories.AdapostRepository
 {
     public class AdapostRepository : GenericRepository<Adapost>, IAdapostRepository
     {
-        private Oras _context;
 
         public AdapostRepository(ApplicationDbContext context) : base(context)
         {
+        }
+        public async Task<Adapost> GetAdapostById(Guid adapostId)
+        {
+            return await _table
+                .Include(a => a.Conditie)
+                .FirstOrDefaultAsync(a => a.Id == adapostId);
         }
     }
 }

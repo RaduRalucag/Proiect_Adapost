@@ -2,6 +2,7 @@
 using Proiect_Adapost.Data;
 using Proiect_Adapost.Models.Adapost;
 using Proiect_Adapost.Repositories.AdapostRepository;
+using Proiect_Adapost.Repositories.ConditieRepository;
 using Proiect_Adapost.Repositories.OrasRepository;
 
 namespace Proiect_Adapost.Services.AdapostService
@@ -10,19 +11,23 @@ namespace Proiect_Adapost.Services.AdapostService
     {
         private readonly IAdapostRepository _adapostRepository;
         private readonly IOrasRepository _orasRepository;
+        private readonly IConditieRepository _conditieRepository;
         private readonly IMapper _mapper;
 
-        public AdapostService(IAdapostRepository repository, IOrasRepository orasRepository, IMapper mapper)
+        public AdapostService(IAdapostRepository repository, IOrasRepository orasRepository, IConditieRepository conditieRepository, IMapper mapper)
         { 
             _adapostRepository = repository;
             _orasRepository = orasRepository;
+            _conditieRepository = conditieRepository;
             _mapper = mapper;
         }
 
-        public async Task CreateAdapost(Adapost adapost, Guid orasId)
+        public async Task CreateAdapost(Adapost adapost, Guid orasId, Guid conditieId)
         {
             var oras = await _orasRepository.GetOrasById(orasId);
             adapost.Oras = oras;
+            var conditie = await _conditieRepository.GetConditieById(conditieId);
+            adapost.Conditie = conditie;
             await _adapostRepository.CreateAsync(adapost);
             await _adapostRepository.SaveAsync();
 
@@ -34,9 +39,9 @@ namespace Proiect_Adapost.Services.AdapostService
             await _adapostRepository.SaveAsync();
         }
 
-        public async Task<Adapost> GetOrasById(Guid id)
+        public async Task<Adapost> GetAdapostById(Guid id)
         {
-            return await _adapostRepository.FindByIdAsync(id);
+            return await _adapostRepository.GetAdapostById(id);
         }
 
         public async Task<List<Adapost>> GetAdaposts()

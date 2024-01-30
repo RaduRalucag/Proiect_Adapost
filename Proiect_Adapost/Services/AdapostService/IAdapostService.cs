@@ -4,9 +4,9 @@ namespace Proiect_Adapost.Services.AdapostService
 {
     public interface IAdapostService
     {
-        Task CreateAdapost(Adapost adapost, Guid orasId);
+        Task CreateAdapost(Adapost adapost, Guid orasId, Guid conditieId);
         Task DeleteAdapost(Adapost adapost);
-        Task<Adapost> GetOrasById(Guid id);
+        Task<Adapost> GetAdapostById(Guid id);
         Task<List<Adapost>> GetAdaposts();
     }
 }
