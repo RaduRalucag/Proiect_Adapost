@@ -2,6 +2,6 @@
 {
     public class AnimalClientRequestDto
     {
-        public int DataAdoptie { get; set; }
+        public string DataAdoptie { get; set; }
     }
 }

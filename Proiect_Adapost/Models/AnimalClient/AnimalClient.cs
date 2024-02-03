@@ -6,7 +6,7 @@ namespace Proiect_Adapost.Models.AnimalClient
     {
         public Guid AnimalId { get; set; }
         public Guid ClientId { get; set; }
-        public int DataAdoptie { get; set; }
+        public string DataAdoptie { get; set; }
         public Animal.Animal? Animal { get; set; }
         public Client.Client? Client { get; set; }
     }

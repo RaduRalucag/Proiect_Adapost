@@ -10,6 +10,7 @@ using Proiect_Adapost.Models.Carnet_sanatate.Dto;
 using Proiect_Adapost.Models.Client.Dto;
 using Proiect_Adapost.Models.Client;
 using Proiect_Adapost.Models.AnimalClient;
+using Proiect_Adapost.Models.AnimalClient.Dto;
 namespace Proiect_Adapost.Helpers
 {
     public class MapperProfile: Profile
@@ -29,7 +30,7 @@ namespace Proiect_Adapost.Helpers
             CreateMap<Client, ClientResponseDto>();
             CreateMap<ClientRequestDto, Client>();
             CreateMap<AnimalClient, AnimalResponseDto>();
-            CreateMap<ClientRequestDto, Client>();
+            CreateMap<AnimalClientRequestDto, AnimalClient>();
             
         }
        

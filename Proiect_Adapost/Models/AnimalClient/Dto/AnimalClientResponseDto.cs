@@ -3,6 +3,6 @@
     public class AnimalClientResponseDto
     {
         public Guid Id { get; set; }
-        public int DataAdoptie { get; set; }
+        public string DataAdoptie { get; set; }
     }
 }

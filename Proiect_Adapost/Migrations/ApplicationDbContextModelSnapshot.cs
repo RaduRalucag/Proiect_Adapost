@@ -103,8 +103,9 @@ namespace Proiect_Adapost.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DataAdoptie")
-                        .HasColumnType("int");
+                    b.Property<string>("DataAdoptie")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime2");
