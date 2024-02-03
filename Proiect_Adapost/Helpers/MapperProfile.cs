@@ -29,7 +29,7 @@ namespace Proiect_Adapost.Helpers
             CreateMap<Carnet_sanatateRequestDto, Carnet_sanatate>();
             CreateMap<Client, ClientResponseDto>();
             CreateMap<ClientRequestDto, Client>();
-            CreateMap<AnimalClient, AnimalResponseDto>();
+            CreateMap<AnimalClient, AnimalClientResponseDto>();
             CreateMap<AnimalClientRequestDto, AnimalClient>();
             
         }
