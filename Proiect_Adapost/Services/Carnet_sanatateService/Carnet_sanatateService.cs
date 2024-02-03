@@ -18,7 +18,7 @@ namespace Proiect_Adapost.Services.Carnet_sanatateService
         }
 
 
-        //getallcarnet_sanatate cu all
+        
         public async Task<IEnumerable<Carnet_sanatate>> GetAllCarnet_sanatate()
         {
             return await _carnet_sanatateRepository.GetAllCarnet_sanatateAsync();
