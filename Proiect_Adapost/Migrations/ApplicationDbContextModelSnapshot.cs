@@ -52,7 +52,7 @@ namespace Proiect_Adapost.Migrations
 
                     b.HasIndex("OrasId");
 
-                    b.ToTable("Adaposts");
+                    b.ToTable("Adaposts", (string)null);
                 });
 
             modelBuilder.Entity("Proiect_Adapost.Models.Animal.Animal", b =>
@@ -85,38 +85,7 @@ namespace Proiect_Adapost.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Animale");
-                });
-
-            modelBuilder.Entity("Proiect_Adapost.Models.AnimalClient.AnimalClient", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AnimalId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ClientId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("DataAdoptie")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AnimalId");
-
-                    b.HasIndex("ClientId");
-
-                    b.ToTable("AnimaleClienti");
+                    b.ToTable("Animale", (string)null);
                 });
 
             modelBuilder.Entity("Proiect_Adapost.Models.Carnet_sanatate.Carnet_sanatate", b =>
@@ -147,7 +116,7 @@ namespace Proiect_Adapost.Migrations
                     b.HasIndex("AnimalId")
                         .IsUnique();
 
-                    b.ToTable("Carnete_sanatate");
+                    b.ToTable("Carnete_sanatate", (string)null);
                 });
 
             modelBuilder.Entity("Proiect_Adapost.Models.Client.Client", b =>
@@ -176,7 +145,7 @@ namespace Proiect_Adapost.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Clienti");
+                    b.ToTable("Clienti", (string)null);
                 });
 
             modelBuilder.Entity("Proiect_Adapost.Models.Orase.Oras", b =>
@@ -197,7 +166,7 @@ namespace Proiect_Adapost.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orase");
+                    b.ToTable("Orase", (string)null);
                 });
 
             modelBuilder.Entity("Proiect_Adapost.Models.Adapost.Adapost", b =>
@@ -209,25 +178,6 @@ namespace Proiect_Adapost.Migrations
                         .IsRequired();
 
                     b.Navigation("Oras");
-                });
-
-            modelBuilder.Entity("Proiect_Adapost.Models.AnimalClient.AnimalClient", b =>
-                {
-                    b.HasOne("Proiect_Adapost.Models.Animal.Animal", "Animal")
-                        .WithMany("AnimaleClienti")
-                        .HasForeignKey("AnimalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Proiect_Adapost.Models.Client.Client", "Client")
-                        .WithMany("AnimaleClienti")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Animal");
-
-                    b.Navigation("Client");
                 });
 
             modelBuilder.Entity("Proiect_Adapost.Models.Carnet_sanatate.Carnet_sanatate", b =>
@@ -243,14 +193,7 @@ namespace Proiect_Adapost.Migrations
 
             modelBuilder.Entity("Proiect_Adapost.Models.Animal.Animal", b =>
                 {
-                    b.Navigation("AnimaleClienti");
-
                     b.Navigation("Carnet_sanatate");
-                });
-
-            modelBuilder.Entity("Proiect_Adapost.Models.Client.Client", b =>
-                {
-                    b.Navigation("AnimaleClienti");
                 });
 
             modelBuilder.Entity("Proiect_Adapost.Models.Orase.Oras", b =>
