@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proiect_Adapost.Data;
 
@@ -11,9 +12,11 @@ using Proiect_Adapost.Data;
 namespace Proiect_Adapost.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240203191637_add-client")]
+    partial class addclient
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,36 +89,6 @@ namespace Proiect_Adapost.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Animale");
-                });
-
-            modelBuilder.Entity("Proiect_Adapost.Models.AnimalClient.AnimalClient", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AnimalId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("ClientId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DataAdoptie")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AnimalId");
-
-                    b.HasIndex("ClientId");
-
-                    b.ToTable("AnimaleClienti");
                 });
 
             modelBuilder.Entity("Proiect_Adapost.Models.Carnet_sanatate.Carnet_sanatate", b =>
@@ -210,25 +183,6 @@ namespace Proiect_Adapost.Migrations
                     b.Navigation("Oras");
                 });
 
-            modelBuilder.Entity("Proiect_Adapost.Models.AnimalClient.AnimalClient", b =>
-                {
-                    b.HasOne("Proiect_Adapost.Models.Animal.Animal", "Animal")
-                        .WithMany("AnimaleClienti")
-                        .HasForeignKey("AnimalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Proiect_Adapost.Models.Client.Client", "Client")
-                        .WithMany("AnimaleClienti")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Animal");
-
-                    b.Navigation("Client");
-                });
-
             modelBuilder.Entity("Proiect_Adapost.Models.Carnet_sanatate.Carnet_sanatate", b =>
                 {
                     b.HasOne("Proiect_Adapost.Models.Animal.Animal", "Animal")
@@ -242,14 +196,7 @@ namespace Proiect_Adapost.Migrations
 
             modelBuilder.Entity("Proiect_Adapost.Models.Animal.Animal", b =>
                 {
-                    b.Navigation("AnimaleClienti");
-
                     b.Navigation("Carnet_sanatate");
-                });
-
-            modelBuilder.Entity("Proiect_Adapost.Models.Client.Client", b =>
-                {
-                    b.Navigation("AnimaleClienti");
                 });
 
             modelBuilder.Entity("Proiect_Adapost.Models.Orase.Oras", b =>

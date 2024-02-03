@@ -12,5 +12,7 @@ namespace Proiect_Adapost.Models.Animal
 
    
         public Carnet_sanatate.Carnet_sanatate? Carnet_sanatate { get; set; }
+
+        public ICollection<AnimalClient.AnimalClient> AnimaleClienti { get; set; }
     }
 }

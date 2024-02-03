@@ -4,6 +4,7 @@ using Proiect_Adapost.Models.Orase;
 using Proiect_Adapost.Models.Animal;
 using Proiect_Adapost.Models.Carnet_sanatate;
 using Proiect_Adapost.Models.Client;
+using Proiect_Adapost.Models.AnimalClient;
 
 namespace Proiect_Adapost.Data
 {
@@ -14,6 +15,7 @@ namespace Proiect_Adapost.Data
         public DbSet<Animal> Animale { get; set; }
         public DbSet<Carnet_sanatate> Carnete_sanatate { get; set; }
         public DbSet<Client> Clienti { get; set; }
+        public DbSet<AnimalClient> AnimaleClienti { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -21,6 +23,15 @@ namespace Proiect_Adapost.Data
         }
             protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Animal>()
+                .HasMany(c => c.AnimaleClienti)
+                .WithOne(c => c.Animal)
+                .HasForeignKey(c => c.AnimalId);
+
+            modelBuilder.Entity<Client>()
+                .HasMany(c => c.AnimaleClienti)
+                .WithOne(c => c.Client)
+                .HasForeignKey(c => c.ClientId); ;
            
             modelBuilder.Entity<Animal>()
                 .HasOne(a => a.Carnet_sanatate)

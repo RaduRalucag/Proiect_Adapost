@@ -3,7 +3,8 @@ using Proiect_Adapost.Repositories.GenericRepository;
 
 namespace Proiect_Adapost.Repositories.AnimalRepository
 {
-    public interface IAnimalRepository: IGenericRepository<Animal>
+    public interface IAnimalRepository : IGenericRepository<Animal>
     {
+        Task<Animal?> GetAnimalById(Guid animalId);
     }
 }

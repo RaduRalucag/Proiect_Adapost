@@ -10,6 +10,9 @@ using Proiect_Adapost.Services.Carnet_sanatateService;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Proiect_Adapost.Repositories.ClientRepository;
 using Proiect_Adapost.Services.ClientService;
+using Proiect_Adapost.Repositories.AnimalClientRepository;
+using Proiect_Adapost.Models.AnimalClient;
+using Proiect_Adapost.Services.AnimalClientService;
 
 namespace Examen.Helpers.Extensions
 {
@@ -18,11 +21,13 @@ namespace Examen.Helpers.Extensions
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
             //services.AddTransient<IRepository, Repository>() 
+
             services.AddTransient<ICarnet_sanatateRepository, Carnet_sanatateRepository>();
             services.AddTransient<IAdapostRepository, AdapostRepository>();
             services.AddTransient<IOrasRepository, OrasRepository>();
             services.AddTransient<IAnimalRepository, AnimalRepository>();
             services.AddTransient<IClientRepository, ClientRepository>();
+            services.AddTransient<IAnimalClientRepository, AnimalClientRepository >();
             return services;
         }
 
@@ -34,6 +39,7 @@ namespace Examen.Helpers.Extensions
             services.AddTransient<Proiect_Adapost.Services.OrasService.IOrasService, OrasService>();
             services.AddTransient<IAnimalService, AnimalService>();
             services.AddTransient<IClientService, ClientService>();
+            services.AddTransient<IAnimalClientService, AnimalClientService>();
             return services;
         }
     }
