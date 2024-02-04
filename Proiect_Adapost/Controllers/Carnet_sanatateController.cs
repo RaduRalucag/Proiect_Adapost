@@ -56,5 +56,15 @@ namespace Proiect_Adapost.Controllers
             var carnet_sanatateResponseDto = _mapper.Map<Carnet_sanatateResponseDto>(carnet_sanatate);
             return Ok(carnet_sanatateResponseDto);
         }
+
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult<Carnet_sanatateResponseDto>> UpdateCarnet_sanatate(Guid id, Carnet_sanatateRequestDto carnet_sanatate)
+        {
+            var _carnet_sanatate = await _carnet_sanatateService.GetCarnet_sanatateById(id);
+            _mapper.Map(carnet_sanatate, _carnet_sanatate);
+            await _carnet_sanatateService.UpdateCarnet_sanatate(_carnet_sanatate);
+            var _carnet_sanatateDTO = _mapper.Map<Carnet_sanatateResponseDto>(_carnet_sanatate);
+            return Ok(_carnet_sanatateDTO);
+        }
     }
 }

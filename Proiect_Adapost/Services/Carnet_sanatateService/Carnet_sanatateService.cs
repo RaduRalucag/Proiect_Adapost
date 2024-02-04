@@ -49,5 +49,11 @@ namespace Proiect_Adapost.Services.Carnet_sanatateService
         {
             return await _carnet_sanatateRepository.FindByIdAsync(id);
         }
+
+        public async Task UpdateCarnet_sanatate(Carnet_sanatate carnet_sanatate)
+        {
+            _carnet_sanatateRepository.Update(carnet_sanatate);
+            await _carnet_sanatateRepository.SaveAsync();
+        }
     }
 }

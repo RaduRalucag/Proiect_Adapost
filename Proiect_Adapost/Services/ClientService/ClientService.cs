@@ -36,5 +36,11 @@ namespace Proiect_Adapost.Services.ClientService
         {
             return (List<Client>)await _clientRepository.GetAllAsync();
         }
+
+        public async Task UpdateClient(Client client)
+        {
+            _clientRepository.Update(client);
+            await _clientRepository.SaveAsync();
+        }
     }
 }

@@ -12,8 +12,8 @@ using Proiect_Adapost.Data;
 namespace Proiect_Adapost.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240203230747_animalclient")]
-    partial class animalclient
+    [Migration("20240204193248_add-allmigrations")]
+    partial class addallmigrations
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,6 +29,9 @@ namespace Proiect_Adapost.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ConditieId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedAt")
@@ -64,6 +67,9 @@ namespace Proiect_Adapost.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("AdapostId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -87,6 +93,8 @@ namespace Proiect_Adapost.Migrations
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdapostId");
 
                     b.ToTable("Animale");
                 });
@@ -123,6 +131,31 @@ namespace Proiect_Adapost.Migrations
                     b.HasIndex("ClientId");
 
                     b.ToTable("AnimaleClienti");
+                });
+
+            modelBuilder.Entity("Proiect_Adapost.Models.Arhiva.Arhiva", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Categorie")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Descriere")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Arhiva");
                 });
 
             modelBuilder.Entity("Proiect_Adapost.Models.Carnet_sanatate.Carnet_sanatate", b =>
@@ -185,6 +218,67 @@ namespace Proiect_Adapost.Migrations
                     b.ToTable("Clienti");
                 });
 
+            modelBuilder.Entity("Proiect_Adapost.Models.Conditie.Conditie", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AdapostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Denumire")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gravitate")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AdapostId")
+                        .IsUnique();
+
+                    b.ToTable("Conditii");
+                });
+
+            modelBuilder.Entity("Proiect_Adapost.Models.Control.Control", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ArhivaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("ConditieId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Data")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArhivaId");
+
+                    b.HasIndex("ConditieId");
+
+                    b.ToTable("Control");
+                });
+
             modelBuilder.Entity("Proiect_Adapost.Models.Orase.Oras", b =>
                 {
                     b.Property<Guid>("Id")
@@ -217,6 +311,15 @@ namespace Proiect_Adapost.Migrations
                     b.Navigation("Oras");
                 });
 
+            modelBuilder.Entity("Proiect_Adapost.Models.Animal.Animal", b =>
+                {
+                    b.HasOne("Proiect_Adapost.Models.Adapost.Adapost", "Adapost")
+                        .WithMany("Animale")
+                        .HasForeignKey("AdapostId");
+
+                    b.Navigation("Adapost");
+                });
+
             modelBuilder.Entity("Proiect_Adapost.Models.AnimalClient.AnimalClient", b =>
                 {
                     b.HasOne("Proiect_Adapost.Models.Animal.Animal", "Animal")
@@ -247,6 +350,43 @@ namespace Proiect_Adapost.Migrations
                     b.Navigation("Animal");
                 });
 
+            modelBuilder.Entity("Proiect_Adapost.Models.Conditie.Conditie", b =>
+                {
+                    b.HasOne("Proiect_Adapost.Models.Adapost.Adapost", "Adapost")
+                        .WithOne("Conditie")
+                        .HasForeignKey("Proiect_Adapost.Models.Conditie.Conditie", "AdapostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Adapost");
+                });
+
+            modelBuilder.Entity("Proiect_Adapost.Models.Control.Control", b =>
+                {
+                    b.HasOne("Proiect_Adapost.Models.Arhiva.Arhiva", "Arhiva")
+                        .WithMany("Control")
+                        .HasForeignKey("ArhivaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Proiect_Adapost.Models.Conditie.Conditie", "Conditie")
+                        .WithMany("Control")
+                        .HasForeignKey("ConditieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Arhiva");
+
+                    b.Navigation("Conditie");
+                });
+
+            modelBuilder.Entity("Proiect_Adapost.Models.Adapost.Adapost", b =>
+                {
+                    b.Navigation("Animale");
+
+                    b.Navigation("Conditie");
+                });
+
             modelBuilder.Entity("Proiect_Adapost.Models.Animal.Animal", b =>
                 {
                     b.Navigation("AnimaleClienti");
@@ -254,9 +394,19 @@ namespace Proiect_Adapost.Migrations
                     b.Navigation("Carnet_sanatate");
                 });
 
+            modelBuilder.Entity("Proiect_Adapost.Models.Arhiva.Arhiva", b =>
+                {
+                    b.Navigation("Control");
+                });
+
             modelBuilder.Entity("Proiect_Adapost.Models.Client.Client", b =>
                 {
                     b.Navigation("AnimaleClienti");
+                });
+
+            modelBuilder.Entity("Proiect_Adapost.Models.Conditie.Conditie", b =>
+                {
+                    b.Navigation("Control");
                 });
 
             modelBuilder.Entity("Proiect_Adapost.Models.Orase.Oras", b =>

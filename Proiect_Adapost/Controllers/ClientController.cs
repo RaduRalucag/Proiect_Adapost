@@ -57,5 +57,15 @@ namespace Proiect_Adapost.Controllers
             var _clientDTO = _mapper.Map<ClientResponseDto>(client);
             return Ok(_clientDTO);
         }
+
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult<ClientResponseDto>> UpdateClient(Guid id, ClientRequestDto client)
+        {
+            var _client = await _clientService.GetClientById(id);
+            _mapper.Map(client, _client);
+            await _clientService.UpdateClient(_client);
+            var _clientDTO = _mapper.Map<ClientResponseDto>(_client);
+            return Ok(_clientDTO);
+        }
     }
 }

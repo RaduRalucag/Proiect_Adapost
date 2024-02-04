@@ -10,5 +10,6 @@ namespace Proiect_Adapost.Services.ClientService
         Task DeleteClient(Client client);
         Task<Client> GetClientById(Guid id);
         Task<List<Client>> GetClienti();
+        Task UpdateClient(Client client);
     }
 }

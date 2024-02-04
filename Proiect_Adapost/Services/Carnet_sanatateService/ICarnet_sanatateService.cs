@@ -11,5 +11,7 @@ namespace Proiect_Adapost.Services.Carnet_sanatateService
         Task<Carnet_sanatate> GetCarnet_sanatateById(Guid id);
         Task<Carnet_sanatate> GetAnimal(Guid id);
 
+        Task UpdateCarnet_sanatate(Carnet_sanatate carnet_sanatate);
+
     }
 }
