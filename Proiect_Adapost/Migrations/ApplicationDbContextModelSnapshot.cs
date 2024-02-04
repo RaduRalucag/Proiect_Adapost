@@ -152,7 +152,7 @@ namespace Proiect_Adapost.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Arhiva");
+                    b.ToTable("Arhive");
                 });
 
             modelBuilder.Entity("Proiect_Adapost.Models.Carnet_sanatate.Carnet_sanatate", b =>
@@ -273,7 +273,7 @@ namespace Proiect_Adapost.Migrations
 
                     b.HasIndex("ConditieId");
 
-                    b.ToTable("Control");
+                    b.ToTable("Controls");
                 });
 
             modelBuilder.Entity("Proiect_Adapost.Models.Orase.Oras", b =>

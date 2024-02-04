@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Proiect_Adapost.Migrations
 {
     /// <inheritdoc />
-    public partial class addallmigrations : Migration
+    public partial class new_migration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Arhiva",
+                name: "Arhive",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -23,7 +23,7 @@ namespace Proiect_Adapost.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Arhiva", x => x.Id);
+                    table.PrimaryKey("PK_Arhive", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,7 +176,7 @@ namespace Proiect_Adapost.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Control",
+                name: "Controls",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -188,15 +188,15 @@ namespace Proiect_Adapost.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Control", x => x.Id);
+                    table.PrimaryKey("PK_Controls", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Control_Arhiva_ArhivaId",
+                        name: "FK_Controls_Arhive_ArhivaId",
                         column: x => x.ArhivaId,
-                        principalTable: "Arhiva",
+                        principalTable: "Arhive",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Control_Conditii_ConditieId",
+                        name: "FK_Controls_Conditii_ConditieId",
                         column: x => x.ConditieId,
                         principalTable: "Conditii",
                         principalColumn: "Id",
@@ -242,13 +242,13 @@ namespace Proiect_Adapost.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Control_ArhivaId",
-                table: "Control",
+                name: "IX_Controls_ArhivaId",
+                table: "Controls",
                 column: "ArhivaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Control_ConditieId",
-                table: "Control",
+                name: "IX_Controls_ConditieId",
+                table: "Controls",
                 column: "ConditieId");
         }
 
@@ -262,7 +262,7 @@ namespace Proiect_Adapost.Migrations
                 name: "Carnete_sanatate");
 
             migrationBuilder.DropTable(
-                name: "Control");
+                name: "Controls");
 
             migrationBuilder.DropTable(
                 name: "Clienti");
@@ -271,7 +271,7 @@ namespace Proiect_Adapost.Migrations
                 name: "Animale");
 
             migrationBuilder.DropTable(
-                name: "Arhiva");
+                name: "Arhive");
 
             migrationBuilder.DropTable(
                 name: "Conditii");
