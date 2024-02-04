@@ -24,7 +24,7 @@ namespace Proiect_Adapost.Data
             : base(options)
         {
         }
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Animal>()
                 .HasMany(c => c.AnimaleClienti)
@@ -65,6 +65,11 @@ namespace Proiect_Adapost.Data
                 .HasMany(c => c.Control)
                 .WithOne(c => c.Conditie)
                 .HasForeignKey(c => c.ConditieId);
+
+            modelBuilder.Entity<Adapost>()
+                .HasMany(a => a.Animale)
+                .WithOne(a => a.Adapost)
+                .HasForeignKey(a => a.AdapostId);
 
             base.OnModelCreating(modelBuilder);
         }

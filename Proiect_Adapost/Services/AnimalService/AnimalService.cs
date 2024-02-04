@@ -44,5 +44,11 @@ namespace Proiect_Adapost.Services.AnimalService
             await _animalRepository.SaveAsync();
         }
 
+        public async Task UpdateAnimal(Animal animal)
+        {
+            _animalRepository.Update(animal);
+            await _animalRepository.SaveAsync();
+        }
+
     }
 }

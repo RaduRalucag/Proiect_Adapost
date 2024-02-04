@@ -51,5 +51,15 @@ namespace Proiect_Adapost.Controllers
             var animalResponseDto = _mapper.Map<AnimalResponseDto>(animal);
             return Ok(animalResponseDto);
         }
+
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult<AnimalResponseDto>> UpdateAnimal(Guid id, [FromBody] AnimalRequestDto animalRequestDto)
+        {
+            var animal = await _animalService.GetAnimal(id);
+            _mapper.Map(animalRequestDto, animal);
+            await _animalService.UpdateAnimal(animal);
+            var animalResponseDto = _mapper.Map<AnimalResponseDto>(animal);
+            return Ok(animalResponseDto);
+        }
     }
 }

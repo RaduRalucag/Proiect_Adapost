@@ -11,5 +11,6 @@ namespace Proiect_Adapost.Services.AnimalService
         Task<IEnumerable<Animal>> GetAllAnimals();
         Task DeleteAnimal(Animal animal);
         Task<Animal> GetAnimal(Guid id);
+        Task UpdateAnimal(Animal animal);
     }
 }

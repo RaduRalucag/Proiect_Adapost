@@ -23,7 +23,6 @@ namespace Proiect_Adapost.Helpers
         {
             // CreateMap<Source, Destination>();
             CreateMap<Adapost, AdapostResponseDto>();
-            // CreateMap<Source, Destination>(); 
             CreateMap<Animal, AnimalResponseDto>();
             CreateMap<AnimalRequestDto, Animal>();
             CreateMap<Adapost, AdapostRequestDto>();
@@ -35,8 +34,8 @@ namespace Proiect_Adapost.Helpers
             CreateMap<ConditieRequestDto, Conditie>();
             CreateMap<Control, ControlResponseDto>();
             CreateMap<ControlRequestDto, Control>();
-            CreateMap<Oras, OrasDto>();
-            CreateMap<OrasDto, Oras>();
+            CreateMap<Oras, OrasResponseDto>();
+            CreateMap<OrasRequestDto, Oras>();
             CreateMap<Carnet_sanatate, Carnet_sanatateResponseDto>()
                 .ForMember(dest => dest.numeAnimal, opt => opt.MapFrom(src => src.Animal.Nume));
             CreateMap<Carnet_sanatateRequestDto, Carnet_sanatate>();

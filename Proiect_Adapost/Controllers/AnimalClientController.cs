@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Proiect_Adapost.Models.AnimalClient;
 using Proiect_Adapost.Models.AnimalClient.Dto;
+using Proiect_Adapost.Models.Conditie.DTO;
 using Proiect_Adapost.Services.AnimalClientService;
 
 namespace Proiect_Adapost.Controllers
@@ -51,6 +52,16 @@ namespace Proiect_Adapost.Controllers
             var animalclient = await _animalclientService.GetAnimalClientById(id);
             await _animalclientService.DeleteAnimalClient(animalclient);
             var _animalclientDTO = _mapper.Map<AnimalClientResponseDto>(animalclient);
+            return Ok(_animalclientDTO);
+        }
+
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult<AnimalClientResponseDto>> UpdateAnimalClient(Guid id, AnimalClientRequestDto animalclient)
+        {
+            var _animalclient = await _animalclientService.GetAnimalClientById(id);
+            _mapper.Map(animalclient, _animalclient);
+            await _animalclientService.UpdateAnimalClient(_animalclient);
+            var _animalclientDTO = _mapper.Map<AnimalClientResponseDto>(_animalclient);
             return Ok(_animalclientDTO);
         }
     }
