@@ -14,7 +14,11 @@ namespace Proiect_Adapost.Helpers
         public MapperProfile()
         {
             // CreateMap<Source, Destination>();
-            CreateMap<Adapost, AdapostResponseDto>();
+            CreateMap<Adapost, AdapostResponseDto>()
+                .ForMember(dest => dest.NumeOras, opt => opt.MapFrom(src => src.Oras.Nume))
+                .ForMember(dest => dest.NumeConditie, opt => opt.MapFrom(src => src.Conditie.Denumire))
+                .ForMember(dest => dest.OrasId, opt => opt.MapFrom(src => src.Oras.Id))
+                .ForMember(dest => dest.ConditieId, opt => opt.MapFrom(src => src.Conditie.Id));
             CreateMap<AdapostRequestDto, Adapost>();
             CreateMap<Oras, OrasResponseDto>()
                 .ForMember(dest => dest.NumeAdaposturi, opt => opt.MapFrom(src => src.Adaposts.Select(a => a.Nume)));

@@ -7,7 +7,7 @@ namespace Proiect_Adapost.Services.AdapostService
         Task CreateAdapost(Adapost adapost, Guid orasId, Guid conditieId);
         Task DeleteAdapost(Adapost adapost);
         Task<Adapost> GetAdapostById(Guid id);
-        Task<List<Adapost>> GetAdaposts();
+        Task<IEnumerable<Adapost>> GetAdaposts();
         Task UpdateAdapost(Adapost adapost);
     }
 }

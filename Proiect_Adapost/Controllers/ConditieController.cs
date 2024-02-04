@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Proiect_Adapost.Models.Conditie;
 using Proiect_Adapost.Models.Conditie.DTO;
@@ -37,7 +38,7 @@ namespace Proiect_Adapost.Controllers
             return Ok(conditieDTO);
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Admin, Inspector")]
         public async Task<ActionResult<ConditieResponseDto>> CreateConditie(ConditieRequestDto conditie)
         {
             var _conditie = _mapper.Map<Conditie>(conditie);
@@ -46,22 +47,22 @@ namespace Proiect_Adapost.Controllers
             return Ok(_conditieDTO);
         }
 
-        [HttpDelete("{id:guid}")]
-        public async Task<ActionResult<ConditieResponseDto>> DeleteConditie(Guid id)
-        {
-            var conditie = await _conditieService.GetConditieById(id);
-            await _conditieService.DeleteConditie(conditie);
-            var _conditieDTO = _mapper.Map<ConditieResponseDto>(conditie);
-            return Ok(_conditieDTO);
-        }
-
-        [HttpPut("{id:guid}")]  
+        [HttpPut("{id:guid}"), Authorize(Roles = "Admin, Inspector")]  
         public async Task<ActionResult<ConditieResponseDto>> UpdateConditie(Guid id, ConditieRequestDto conditie)
         {
             var _conditie = await _conditieService.GetConditieById(id);
             _mapper.Map(conditie, _conditie);
             await _conditieService.UpdateConditie(_conditie);
             var _conditieDTO = _mapper.Map<ConditieResponseDto>(_conditie);
+            return Ok(_conditieDTO);
+        }
+
+        [HttpDelete("{id:guid}"), Authorize(Roles = "Admin, Inspector")]
+        public async Task<ActionResult<ConditieResponseDto>> DeleteConditie(Guid id)
+        {
+            var conditie = await _conditieService.GetConditieById(id);
+            await _conditieService.DeleteConditie(conditie);
+            var _conditieDTO = _mapper.Map<ConditieResponseDto>(conditie);
             return Ok(_conditieDTO);
         }
     }

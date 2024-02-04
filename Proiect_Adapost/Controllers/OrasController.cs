@@ -4,6 +4,7 @@ using Proiect_Adapost.Models.Oras.DTO;
 using Proiect_Adapost.Models.Oras;
 using Proiect_Adapost.Services.OrasService;
 using Proiect_Adapost.Models.Orase;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Proiect_Adapost.Controllers
 {
@@ -37,7 +38,7 @@ namespace Proiect_Adapost.Controllers
                 return Ok(orasDTO);
             }
 
-            [HttpPost]
+            [HttpPost, Authorize(Roles = "Admin")]
             public async Task<ActionResult<OrasResponseDto>> CreateOras(OrasRequestDto oras)
             {
                 var _oras = _mapper.Map<Oras>(oras);
@@ -46,16 +47,7 @@ namespace Proiect_Adapost.Controllers
                 return Ok(_orasDTO);
             }
 
-            [HttpDelete("{id:guid}")]
-            public async Task<ActionResult<OrasResponseDto>> DeleteOras(Guid id)
-            {
-                var oras = await _orasService.GetOrasById(id);
-                await _orasService.DeleteOras(oras);
-                var _orasDTO = _mapper.Map<OrasResponseDto>(oras);
-                return Ok(_orasDTO);
-            }
-
-            [HttpPost("{id:guid}")]
+            [HttpPost("{id:guid}"), Authorize(Roles = "Admin")]
             public async Task<ActionResult<OrasResponseDto>> UpdateOras(Guid id, OrasRequestDto oras)
         {
                 var _oras = await _orasService.GetOrasById(id);
@@ -64,5 +56,14 @@ namespace Proiect_Adapost.Controllers
                 var _orasDTO = _mapper.Map<OrasResponseDto>(_oras);
                 return Ok(_orasDTO);
             }
-        }
+
+            [HttpDelete("{id:guid}"), Authorize(Roles = "Admin")]
+            public async Task<ActionResult<OrasResponseDto>> DeleteOras(Guid id)
+            {
+                var oras = await _orasService.GetOrasById(id);
+                await _orasService.DeleteOras(oras);
+                var _orasDTO = _mapper.Map<OrasResponseDto>(oras);
+                return Ok(_orasDTO);
+            }
+    }
  }

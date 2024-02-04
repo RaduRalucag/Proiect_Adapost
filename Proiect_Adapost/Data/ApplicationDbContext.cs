@@ -2,6 +2,7 @@
 using Proiect_Adapost.Models.Adapost;
 using Proiect_Adapost.Models.Arhiva;
 using Proiect_Adapost.Models.Conditie;
+using Proiect_Adapost.Models.Control;
 using Proiect_Adapost.Models.Orase;
 
 namespace Proiect_Adapost.Data
@@ -11,6 +12,8 @@ namespace Proiect_Adapost.Data
         public DbSet<Adapost> Adaposts { get; set; }
         public DbSet<Oras> Orase { get; set; }
         public DbSet<Conditie> Conditii { get; set; }
+        public DbSet<Arhiva> Arhive { get; set; }
+        public DbSet<Control> Controls { get; set; }
 
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)

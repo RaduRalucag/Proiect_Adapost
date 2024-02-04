@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Proiect_Adapost.Models.Control;
 using Proiect_Adapost.Models.Control.DTO;
@@ -36,7 +37,7 @@ namespace Proiect_Adapost.Controllers
             return Ok(controlDTO);
         }
 
-        [HttpPost("arhiva/{arhivaId:guid},conditie/{conditieId:guid}")]
+        [HttpPost("arhiva/{arhivaId:guid},conditie/{conditieId:guid}"), Authorize(Roles = "Admin, Inspector")]
         public async Task<ActionResult<ControlResponseDto>> CreateControl(ControlRequestDto control, Guid arhivaId, Guid conditieId)
         {
             var _control = _mapper.Map<Control>(control);
@@ -45,22 +46,22 @@ namespace Proiect_Adapost.Controllers
             return Ok(_controlDTO);
         }
 
-        [HttpDelete("{id:guid}")]
-        public async Task<ActionResult<ControlResponseDto>> DeleteControl(Guid id)
-        {
-            var control = await _controlService.GetControlById(id);
-            await _controlService.DeleteControl(control);
-            var _controlDTO = _mapper.Map<ControlResponseDto>(control);
-            return Ok(_controlDTO);
-        }
-
-        [HttpPut("{id:guid}")]
+        [HttpPut("{id:guid}"), Authorize(Roles = "Admin, Inspector")]
         public async Task<ActionResult<ControlResponseDto>> UpdateControl(Guid id, ControlRequestDto control)
         {
             var _control = await _controlService.GetControlById(id);
             _mapper.Map(control, _control);
             await _controlService.UpdateControl(_control);
             var _controlDTO = _mapper.Map<ControlResponseDto>(_control);
+            return Ok(_controlDTO);
+        }
+
+        [HttpDelete("{id:guid}"), Authorize(Roles = "Admin, Inspector")]
+        public async Task<ActionResult<ControlResponseDto>> DeleteControl(Guid id)
+        {
+            var control = await _controlService.GetControlById(id);
+            await _controlService.DeleteControl(control);
+            var _controlDTO = _mapper.Map<ControlResponseDto>(control);
             return Ok(_controlDTO);
         }
 

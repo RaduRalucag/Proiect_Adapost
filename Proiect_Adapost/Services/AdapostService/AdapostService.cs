@@ -44,9 +44,9 @@ namespace Proiect_Adapost.Services.AdapostService
             return await _adapostRepository.GetAdapostById(id);
         }
 
-        public async Task<List<Adapost>> GetAdaposts()
+        public async Task<IEnumerable<Adapost>> GetAdaposts()
         {
-            return (List<Adapost>)await _adapostRepository.GetAllAsync();
+            return await _adapostRepository.GetAllAdapostsAsync();
         }
 
         public async Task UpdateAdapost(Adapost adapost)

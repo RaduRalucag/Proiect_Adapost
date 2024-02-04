@@ -16,7 +16,17 @@ namespace Proiect_Adapost.Repositories.AdapostRepository
         {
             return await _table
                 .Include(a => a.Conditie)
+                .Include(a => a.Oras)
                 .FirstOrDefaultAsync(a => a.Id == adapostId);
+        }
+
+        public async Task<IEnumerable<Adapost>> GetAllAdapostsAsync()
+        {
+            return await _table
+                .Include(a => a.Conditie)
+                .Include(a => a.Oras)
+                .AsNoTracking()
+                .ToListAsync();
         }
     }
 }
