@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Proiect_Adapost.Models.Adapost;
 using Proiect_Adapost.Models.Adapost.DTO;
@@ -19,7 +20,7 @@ namespace Proiect_Adapost.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<ActionResult<AdapostResponseDto>> GetAdaposts()
         {
             var adaposts = await _adapostService.GetAdaposts();
@@ -48,6 +49,16 @@ namespace Proiect_Adapost.Controllers
             var adapost = await _adapostService.GetAdapostById(id);
             await _adapostService.DeleteAdapost(adapost);
             var _adapostDTO = _mapper.Map<AdapostResponseDto>(adapost);
+            return Ok(_adapostDTO);
+        }
+
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult<AdapostResponseDto>> UpdateAdapost(Guid id, AdapostRequestDto adapost)
+        {
+            var _adapost = await _adapostService.GetAdapostById(id);
+            _mapper.Map(adapost, _adapost);
+            await _adapostService.UpdateAdapost(_adapost);
+            var _adapostDTO = _mapper.Map<AdapostResponseDto>(_adapost);
             return Ok(_adapostDTO);
         }
 

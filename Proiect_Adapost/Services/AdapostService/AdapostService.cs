@@ -48,5 +48,11 @@ namespace Proiect_Adapost.Services.AdapostService
         {
             return (List<Adapost>)await _adapostRepository.GetAllAsync();
         }
+
+        public async Task UpdateAdapost(Adapost adapost)
+        {
+            _adapostRepository.Update(adapost);
+            await _adapostRepository.SaveAsync();
+        }
     }
 }

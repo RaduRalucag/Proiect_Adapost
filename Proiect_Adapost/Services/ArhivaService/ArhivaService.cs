@@ -34,5 +34,11 @@ namespace Proiect_Adapost.Services.ArhivaService
             return await _arhivaRepository.GetAllAsync();
         }
 
+        public async Task UpdateArhiva(Arhiva arhiva)
+        {
+            _arhivaRepository.Update(arhiva);
+            await _arhivaRepository.SaveAsync();
+        }
+
     }
 }

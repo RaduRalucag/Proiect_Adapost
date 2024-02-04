@@ -44,5 +44,11 @@ namespace Proiect_Adapost.Services.ControlService
         {
             return (List<Control>)await _controlRepository.GetAllAsync();
         }
+
+        public async Task UpdateControl(Control control)
+        {
+            _controlRepository.Update(control);
+            await _controlRepository.SaveAsync();
+        }
     }
 }

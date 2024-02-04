@@ -8,5 +8,6 @@ namespace Proiect_Adapost.Services.ControlService
         Task DeleteControl(Control control);
         Task<Control> GetControlById(Guid id);
         Task<IEnumerable<Control>> GetControls();
+        Task UpdateControl(Control control);
     }
 }

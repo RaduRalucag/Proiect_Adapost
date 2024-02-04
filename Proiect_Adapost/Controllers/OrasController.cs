@@ -54,5 +54,15 @@ namespace Proiect_Adapost.Controllers
                 var _orasDTO = _mapper.Map<OrasResponseDto>(oras);
                 return Ok(_orasDTO);
             }
+
+            [HttpPost("{id:guid}")]
+            public async Task<ActionResult<OrasResponseDto>> UpdateOras(Guid id, OrasRequestDto oras)
+        {
+                var _oras = await _orasService.GetOrasById(id);
+                _mapper.Map(oras, _oras);
+                await _orasService.UpdateOras(_oras);
+                var _orasDTO = _mapper.Map<OrasResponseDto>(_oras);
+                return Ok(_orasDTO);
+            }
         }
  }

@@ -54,5 +54,15 @@ namespace Proiect_Adapost.Controllers
             var _conditieDTO = _mapper.Map<ConditieResponseDto>(conditie);
             return Ok(_conditieDTO);
         }
+
+        [HttpPut("{id:guid}")]  
+        public async Task<ActionResult<ConditieResponseDto>> UpdateConditie(Guid id, ConditieRequestDto conditie)
+        {
+            var _conditie = await _conditieService.GetConditieById(id);
+            _mapper.Map(conditie, _conditie);
+            await _conditieService.UpdateConditie(_conditie);
+            var _conditieDTO = _mapper.Map<ConditieResponseDto>(_conditie);
+            return Ok(_conditieDTO);
+        }
     }
 }

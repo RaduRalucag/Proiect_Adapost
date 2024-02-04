@@ -8,6 +8,7 @@ namespace Proiect_Adapost.Services.ArhivaService
         Task DeleteArhiva(Arhiva arhiva);
         Task<Arhiva> GetArhivaById(Guid id);
         Task<IEnumerable<Arhiva>> GetArhiva();
+        Task UpdateArhiva(Arhiva arhiva);
 
     }
 }

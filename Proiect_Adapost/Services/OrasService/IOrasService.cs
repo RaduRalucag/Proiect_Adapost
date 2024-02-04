@@ -8,5 +8,6 @@ namespace Proiect_Adapost.Services.OrasService
         Task DeleteOras(Oras oras);
         Task<Oras> GetOrasById(Guid id);
         Task<IEnumerable<Oras>> GetOrase();
+        Task UpdateOras(Oras oras);
     }
 }

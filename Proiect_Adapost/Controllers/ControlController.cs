@@ -54,5 +54,15 @@ namespace Proiect_Adapost.Controllers
             return Ok(_controlDTO);
         }
 
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult<ControlResponseDto>> UpdateControl(Guid id, ControlRequestDto control)
+        {
+            var _control = await _controlService.GetControlById(id);
+            _mapper.Map(control, _control);
+            await _controlService.UpdateControl(_control);
+            var _controlDTO = _mapper.Map<ControlResponseDto>(_control);
+            return Ok(_controlDTO);
+        }
+
     }
 }

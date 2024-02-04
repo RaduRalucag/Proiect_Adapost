@@ -34,5 +34,11 @@ namespace Proiect_Adapost.Services.OrasService
             
             return await _orasRepository.GetAllOraseAsync();
         }
+
+        public async Task UpdateOras(Oras oras)
+        {
+            _orasRepository.Update(oras);
+            await _orasRepository.SaveAsync();
+        }
     }
 }

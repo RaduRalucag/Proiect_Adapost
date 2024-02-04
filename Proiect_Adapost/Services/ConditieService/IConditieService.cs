@@ -8,6 +8,6 @@ namespace Proiect_Adapost.Services.ConditieService
         Task DeleteConditie(Conditie conditie);
         Task<Conditie> GetConditieById(Guid id);
         Task<IEnumerable<Conditie>> GetConditii();
-
+        Task UpdateConditie(Conditie conditie);
     }
 }

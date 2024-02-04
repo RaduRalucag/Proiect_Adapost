@@ -34,5 +34,12 @@ namespace Proiect_Adapost.Services.ConditieService
         {
             return (List<Conditie>)await _conditieRepository.GetAllAsync();
         }
+
+
+        public async Task UpdateConditie(Conditie conditie)
+        {
+            _conditieRepository.Update(conditie);
+            await _conditieRepository.SaveAsync();
+        }
     }
 }
