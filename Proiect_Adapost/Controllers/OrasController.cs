@@ -21,7 +21,7 @@ namespace Proiect_Adapost.Controllers
                 _mapper = mapper;
             }
 
-            [HttpGet]
+            [HttpGet, Authorize(Roles = "User")]
             public async Task<ActionResult<IEnumerable<OrasResponseDto>>> GetOrase()
             {
                 var orase = await _orasService.GetOrase();
@@ -30,7 +30,7 @@ namespace Proiect_Adapost.Controllers
 
             }
 
-            [HttpGet("{id:guid}")]
+            [HttpGet("{id:guid}"), Authorize(Roles = "User")]
             public async Task<ActionResult<OrasResponseDto>> GetOrasById(Guid id)
             {
                 var oras = await _orasService.GetOrasById(id);

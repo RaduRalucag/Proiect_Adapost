@@ -20,7 +20,7 @@ namespace Proiect_Adapost.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "User")]
         public async Task<ActionResult<IEnumerable<ControlResponseDto>>> GetControls()
         {
             var controls = await _controlService.GetControls();
@@ -29,7 +29,7 @@ namespace Proiect_Adapost.Controllers
 
         }
 
-        [HttpGet("{id:guid}")]
+        [HttpGet("{id:guid}"), Authorize(Roles = "User")]
         public async Task<ActionResult<ControlResponseDto>> GetControlById(Guid id)
         {
             var control = await _controlService.GetControlById(id);

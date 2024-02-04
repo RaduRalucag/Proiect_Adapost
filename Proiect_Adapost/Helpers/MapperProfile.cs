@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Proiect_Adapost.Models.Adapost;
 using Proiect_Adapost.Models.Adapost.DTO;
+using Proiect_Adapost.Models.Arhiva;
+using Proiect_Adapost.Models.Arhiva.DTO;
 using Proiect_Adapost.Models.Conditie;
 using Proiect_Adapost.Models.Conditie.DTO;
 using Proiect_Adapost.Models.Control;
@@ -27,6 +29,8 @@ namespace Proiect_Adapost.Helpers
             CreateMap<ConditieRequestDto, Conditie>();
             CreateMap<Control, ControlResponseDto>();
             CreateMap<ControlRequestDto, Control>();
+            CreateMap<Arhiva, ArhivaResponseDto>();
+            CreateMap<ArhivaRequestDto, Arhiva>();
         }
     }
 }

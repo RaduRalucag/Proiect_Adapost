@@ -38,8 +38,18 @@ namespace Proiect_Adapost.Controllers
             string parolaHash = BCrypt.Net.BCrypt.HashPassword(userrequest.Parola);
             user.Nume = userrequest.Nume;
             user.ParolaHash = parolaHash;
+            user.Roles = new List<Role> { Role.User };
             return Ok(user);
         }
+
+        /*[HttpPatch("ChangeRole")]
+        [Authorize(Roles = "Admin")]
+        public ActionResult<User> ChangeRole(Guid userId, Role rol)
+        {
+            var user = _userService.GetUserById(userId);
+            user.Roles.Add(rol);
+            return Ok(user);
+        }*/
 
         [HttpPost("Login")]
         public ActionResult<User> Login(UserRequestDto userrequest)

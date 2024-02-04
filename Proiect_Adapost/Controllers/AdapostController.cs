@@ -20,7 +20,7 @@ namespace Proiect_Adapost.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize(Roles = "User")]
         public async Task<ActionResult<AdapostResponseDto>> GetAdaposts()
         {
             var adaposts = await _adapostService.GetAdaposts();
@@ -28,7 +28,7 @@ namespace Proiect_Adapost.Controllers
             return Ok(adapostsDTO);
         }
 
-        [HttpGet("{id:guid}")]
+        [HttpGet("{id:guid}"), Authorize(Roles = "User")]
         public async Task<ActionResult<AdapostResponseDto>> GetAdapostById(Guid id)
         {
             var adapost = await _adapostService.GetAdapostById(id);

@@ -4,11 +4,13 @@ using Proiect_Adapost.Repositories.ArhivaRepository;
 using Proiect_Adapost.Repositories.ConditieRepository;
 using Proiect_Adapost.Repositories.ControlRepository;
 using Proiect_Adapost.Repositories.OrasRepository;
+using Proiect_Adapost.Repositories.UserRepository;
 using Proiect_Adapost.Services.AdapostService;
 using Proiect_Adapost.Services.ArhivaService;
 using Proiect_Adapost.Services.ConditieService;
 using Proiect_Adapost.Services.ControlService;
 using Proiect_Adapost.Services.OrasService;
+using Proiect_Adapost.Services.UserService;
 
 namespace Examen.Helpers.Extensions
 {
@@ -22,6 +24,7 @@ namespace Examen.Helpers.Extensions
             services.AddTransient<IConditieRepository, ConditieRepository>();
             services.AddTransient<IControlRepository, ControlRepository>();
             services.AddTransient<IArhivaRepository, ArhivaRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
             return services;
         }
 
@@ -33,6 +36,7 @@ namespace Examen.Helpers.Extensions
             services.AddTransient<IConditieService, ConditieService>();
             services.AddTransient<IControlService, ControlService>();
             services.AddTransient<IArhivaService, ArhivaService>();
+            services.AddTransient<IUserService, UserService>();
             return services;
         }
     }
