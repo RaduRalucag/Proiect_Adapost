@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Proiect_Adapost.Models.Adapost;
 using Proiect_Adapost.Models.Adapost.DTO;
@@ -19,43 +20,46 @@ namespace Proiect_Adapost.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<AdapostRequestDto>> GetAdaposts()
+        [HttpGet, Authorize]
+        public async Task<ActionResult<AdapostResponseDto>> GetAdaposts()
         {
             var adaposts = await _adapostService.GetAdaposts();
             return Ok(adaposts);
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<ActionResult<AdapostRequestDto>> GetAdapostById(Guid id)
+        public async Task<ActionResult<AdapostResponseDto>> GetAdapostById(Guid id)
         {
-            var adapost = await _adapostService.GetOrasById(id);
+            var adapost = await _adapostService.GetAdapostById(id);
             return Ok(adapost);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<AdapostRequestDto>> CreateAdapost(AdapostRequestDto adapost)
+        [HttpPost("oras/{orasId:guid},conditie/{conditieId:guid}")]
+        public async Task<ActionResult<AdapostResponseDto>> CreateAdapost(AdapostRequestDto adapost, Guid orasId, Guid conditieId)
         {
             var _adapost = _mapper.Map<Adapost>(adapost);
-            await _adapostService.CreateAdapost(_adapost);
-            var _adapostDTO = _mapper.Map<AdapostRequestDto>(_adapost);
+            await _adapostService.CreateAdapost(_adapost, orasId, conditieId);
+            var _adapostDTO = _mapper.Map<AdapostResponseDto>(_adapost);
             return Ok(_adapostDTO);
         }  
 
         [HttpDelete("{id:guid}")]
-        public async Task<ActionResult<AdapostRequestDto>> DeleteAdapost(Guid id)
+        public async Task<ActionResult<AdapostResponseDto>> DeleteAdapost(Guid id)
         {
-            var adapost = await _adapostService.GetOrasById(id);
+            var adapost = await _adapostService.GetAdapostById(id);
             await _adapostService.DeleteAdapost(adapost);
-            var _adapostDTO = _mapper.Map<AdapostRequestDto>(adapost);
+            var _adapostDTO = _mapper.Map<AdapostResponseDto>(adapost);
             return Ok(_adapostDTO);
         }
 
-        [HttpGet("oras/{id:guid}")]
-        public async Task<ActionResult<AdapostRequestDto>> GetAdapostsByOras(Guid id)
+        [HttpPut("{id:guid}")]
+        public async Task<ActionResult<AdapostResponseDto>> UpdateAdapost(Guid id, AdapostRequestDto adapost)
         {
-            var adaposts = await _adapostService.GetAdapostsByOras(id);
-            return Ok(adaposts);
+            var _adapost = await _adapostService.GetAdapostById(id);
+            _mapper.Map(adapost, _adapost);
+            await _adapostService.UpdateAdapost(_adapost);
+            var _adapostDTO = _mapper.Map<AdapostResponseDto>(_adapost);
+            return Ok(_adapostDTO);
         }
 
     }

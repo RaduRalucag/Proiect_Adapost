@@ -21,36 +21,47 @@ namespace Proiect_Adapost.Controllers
             }
 
             [HttpGet]
-            public async Task<ActionResult<IEnumerable<OrasDto>>> GetOrase()
+            public async Task<ActionResult<IEnumerable<OrasResponseDto>>> GetOrase()
             {
                 var orase = await _orasService.GetOrase();
-                var oraseDTO = _mapper.Map<IEnumerable<OrasDto>>(orase);
+                var oraseDTO = _mapper.Map<IEnumerable<OrasResponseDto>>(orase);
                 return Ok(oraseDTO);
 
             }
 
             [HttpGet("{id:guid}")]
-            public async Task<ActionResult<OrasDto>> GetOrasById(Guid id)
+            public async Task<ActionResult<OrasResponseDto>> GetOrasById(Guid id)
             {
-                var adapost = await _orasService.GetOrasById(id);
-                return Ok(adapost);
+                var oras = await _orasService.GetOrasById(id);
+                var orasDTO = _mapper.Map<OrasResponseDto>(oras);
+                return Ok(orasDTO);
             }
 
             [HttpPost]
-            public async Task<ActionResult<OrasDto>> CreateOras(OrasDto oras)
+            public async Task<ActionResult<OrasResponseDto>> CreateOras(OrasRequestDto oras)
             {
                 var _oras = _mapper.Map<Oras>(oras);
                 await _orasService.CreateOras(_oras);
-                var _orasDTO = _mapper.Map<OrasDto>(_oras);
+                var _orasDTO = _mapper.Map<OrasResponseDto>(_oras);
                 return Ok(_orasDTO);
             }
 
             [HttpDelete("{id:guid}")]
-            public async Task<ActionResult<OrasDto>> DeleteOras(Guid id)
+            public async Task<ActionResult<OrasResponseDto>> DeleteOras(Guid id)
             {
                 var oras = await _orasService.GetOrasById(id);
                 await _orasService.DeleteOras(oras);
-                var _orasDTO = _mapper.Map<OrasDto>(oras);
+                var _orasDTO = _mapper.Map<OrasResponseDto>(oras);
+                return Ok(_orasDTO);
+            }
+
+            [HttpPost("{id:guid}")]
+            public async Task<ActionResult<OrasResponseDto>> UpdateOras(Guid id, OrasRequestDto oras)
+        {
+                var _oras = await _orasService.GetOrasById(id);
+                _mapper.Map(oras, _oras);
+                await _orasService.UpdateOras(_oras);
+                var _orasDTO = _mapper.Map<OrasResponseDto>(_oras);
                 return Ok(_orasDTO);
             }
         }

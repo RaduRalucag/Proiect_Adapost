@@ -5,5 +5,7 @@ namespace Proiect_Adapost.Repositories.OrasRepository
 {
     public interface IOrasRepository : IGenericRepository<Oras>
     {
+        Task<IEnumerable<Oras>> GetAllOraseAsync();
+        Task<Oras> GetOrasById(Guid orasId);
     }
 }
