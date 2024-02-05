@@ -14,11 +14,33 @@ namespace Proiect_Adapost.Controllers
         private readonly IMapper _mapper;
         private readonly IAnimalService _animalService;
 
+        public List<Animal> animalsTable = new List<Animal>();
         public AnimalController(IAnimalService animalService, IMapper mapper)
         {
             _mapper = mapper;
             _animalService = animalService;
+
+            /*for(int i = 1; i <=  100; i++)
+            {
+               animalsTable.Add( new Animal { Nume = "Animal" + i});
+            }*/
         }
+
+        
+
+        /*[HttpGet]
+        public IEnumerable<Animal> Get(int page=1, int pagesize=10)
+        {
+            var totalCount = animalsTable.Count();
+            var totalPages= (int)Math.Ceiling((decimal)totalCount /pagesize);
+            var productsPerPage = animalsTable
+                .Skip(pagesize * (page - 1))
+                .Take(pagesize)
+                .ToList();
+            return productsPerPage;
+        }*/
+
+
         [HttpGet]
         [Authorize(Roles = "User")]
         public async Task<ActionResult<IEnumerable<AnimalResponseDto>>> GetAllAnimals()
