@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Proiect_Adapost.Models.Arhiva;
 using Proiect_Adapost.Models.Arhiva.DTO;
@@ -20,6 +21,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<IEnumerable<ArhivaResponseDto>>> GetArhiva()
         {
             var arhiva = await _arhivaService.GetArhiva();
@@ -28,6 +30,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpGet("{id:guid}")]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<ArhivaResponseDto>> GetArhivaById(Guid id)
         {
             var arhiva = await _arhivaService.GetArhivaById(id);
@@ -36,6 +39,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin, Inspector")]
         public async Task<ActionResult<ArhivaResponseDto>> CreateArhiva(ArhivaRequestDto arhiva)
         {
             var _arhiva = _mapper.Map<Arhiva>(arhiva);
@@ -50,6 +54,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpPut("{id:guid}")]
+        [Authorize(Roles = "Admin, Inspector")]
         public async Task<ActionResult<ArhivaResponseDto>> UpdateArhiva(Guid id, ArhivaRequestDto arhiva)
         {
             var _arhiva = await _arhivaService.GetArhivaById(id);
@@ -60,6 +65,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpDelete("{id:guid}")]
+        [Authorize(Roles = "Admin, Inspector")]
         public async Task<ActionResult<ArhivaResponseDto>> DeleteArhiva(Guid id)
         {
             var arhiva = await _arhivaService.GetArhivaById(id);

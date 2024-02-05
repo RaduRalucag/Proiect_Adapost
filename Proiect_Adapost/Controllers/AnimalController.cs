@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Proiect_Adapost.Models.Animal;
 using Proiect_Adapost.Models.Animal.Dto;
@@ -19,6 +20,7 @@ namespace Proiect_Adapost.Controllers
             _animalService = animalService;
         }
         [HttpGet]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<IEnumerable<AnimalResponseDto>>> GetAllAnimals()
         {
             var animals = await _animalService.GetAllAnimals();
@@ -27,6 +29,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<AnimalResponseDto>> CreateAnimal([FromBody] AnimalRequestDto animalRequestDto)
         {
             var animal = _mapper.Map<Animal>(animalRequestDto);
@@ -34,7 +37,9 @@ namespace Proiect_Adapost.Controllers
             var animalResponseDto = _mapper.Map<AnimalResponseDto>(animal);
             return Ok(animalResponseDto);
         }
+
         [HttpGet("{id:guid}")]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<AnimalResponseDto>> GetAnimal(Guid id)
         {
             var animal = await _animalService.GetAnimal(id);
@@ -44,6 +49,7 @@ namespace Proiect_Adapost.Controllers
 
      
         [HttpDelete("{id:guid}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<AnimalResponseDto>> DeleteAnimal(Guid id)
         {
             var animal = await _animalService.GetAnimal(id);
@@ -53,6 +59,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpPut("{id:guid}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<AnimalResponseDto>> UpdateAnimal(Guid id, [FromBody] AnimalRequestDto animalRequestDto)
         {
             var animal = await _animalService.GetAnimal(id);

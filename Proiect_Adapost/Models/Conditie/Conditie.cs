@@ -6,8 +6,8 @@ namespace Proiect_Adapost.Models.Conditie
     {
         public string Denumire { get; set; }
         public int Gravitate { get; set; }
-        public Guid AdapostId { get; set; }
+        public Guid? AdapostId { get; set; }
         public Adapost.Adapost? Adapost { get; set; }
-        public ICollection<Control.Control> Control { get; set; }
+        public ICollection<Control.Control>? Control { get; set; }
     }
 }

@@ -20,7 +20,8 @@ namespace Proiect_Adapost.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet, Authorize(Roles = "User")]
+        [HttpGet] 
+        [Authorize(Roles = "User")]
 
         public async Task<ActionResult<IEnumerable<ConditieResponseDto>>> GetConditii()
         {
@@ -30,7 +31,8 @@ namespace Proiect_Adapost.Controllers
 
         }
 
-        [HttpGet("{id:guid}"), Authorize(Roles = "User")]
+        [HttpGet("{id:guid}")] 
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<ConditieResponseDto>> GetConditieById(Guid id)
         {
             var conditie = await _conditieService.GetConditieById(id);
@@ -38,7 +40,8 @@ namespace Proiect_Adapost.Controllers
             return Ok(conditieDTO);
         }
 
-        [HttpPost, Authorize(Roles = "Admin, Inspector")]
+        [HttpPost] 
+        [Authorize(Roles = "Admin,Inspector")]
         public async Task<ActionResult<ConditieResponseDto>> CreateConditie(ConditieRequestDto conditie)
         {
             var _conditie = _mapper.Map<Conditie>(conditie);
@@ -47,7 +50,8 @@ namespace Proiect_Adapost.Controllers
             return Ok(_conditieDTO);
         }
 
-        [HttpPut("{id:guid}"), Authorize(Roles = "Admin, Inspector")]  
+        [HttpPut("{id:guid}")] 
+        [Authorize(Roles = "Admin,Inspector")]  
         public async Task<ActionResult<ConditieResponseDto>> UpdateConditie(Guid id, ConditieRequestDto conditie)
         {
             var _conditie = await _conditieService.GetConditieById(id);
@@ -57,7 +61,8 @@ namespace Proiect_Adapost.Controllers
             return Ok(_conditieDTO);
         }
 
-        [HttpDelete("{id:guid}"), Authorize(Roles = "Admin, Inspector")]
+        [HttpDelete("{id:guid}")]
+        [Authorize(Roles = "Admin, Inspector")]
         public async Task<ActionResult<ConditieResponseDto>> DeleteConditie(Guid id)
         {
             var conditie = await _conditieService.GetConditieById(id);

@@ -32,8 +32,8 @@ namespace Proiect_Adapost.Controllers
             return Ok(_userService.GetNume());
         }
 
-        [HttpPost("Register")]
-        public ActionResult<User> Register(UserRequestDto userrequest)
+        [HttpPost("Register_User")]
+        public ActionResult<User> RegisterUser(UserRequestDto userrequest)
         {
             string parolaHash = BCrypt.Net.BCrypt.HashPassword(userrequest.Parola);
             user.Nume = userrequest.Nume;
@@ -42,14 +42,35 @@ namespace Proiect_Adapost.Controllers
             return Ok(user);
         }
 
-        /*[HttpPatch("ChangeRole")]
-        [Authorize(Roles = "Admin")]
-        public ActionResult<User> ChangeRole(Guid userId, Role rol)
+        [HttpPost("Register_Admin")]
+        public ActionResult<User> RegisterAdmin(UserRequestDto userrequest)
         {
-            var user = _userService.GetUserById(userId);
-            user.Roles.Add(rol);
+            string parolaHash = BCrypt.Net.BCrypt.HashPassword(userrequest.Parola);
+            user.Nume = userrequest.Nume;
+            user.ParolaHash = parolaHash;
+            user.Roles = new List<Role> { Role.Admin, Role.User };
             return Ok(user);
-        }*/
+        }
+
+        [HttpPost("Register_Doctor")]
+        public ActionResult<User> RegisterDoctor(UserRequestDto userrequest)
+        {
+            string parolaHash = BCrypt.Net.BCrypt.HashPassword(userrequest.Parola);
+            user.Nume = userrequest.Nume;
+            user.ParolaHash = parolaHash;
+            user.Roles = new List<Role> { Role.User, Role.Doctor };
+            return Ok(user);
+        }
+
+        [HttpPost("Register_Inspector")]
+        public ActionResult<User> RegisterInspector(UserRequestDto userrequest)
+        {
+            string parolaHash = BCrypt.Net.BCrypt.HashPassword(userrequest.Parola);
+            user.Nume = userrequest.Nume;
+            user.ParolaHash = parolaHash;
+            user.Roles = new List<Role> { Role.User, Role.Inspector };
+            return Ok(user);
+        }
 
         [HttpPost("Login")]
         public ActionResult<User> Login(UserRequestDto userrequest)
@@ -121,12 +142,13 @@ namespace Proiect_Adapost.Controllers
         {
             List<Claim> claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Nume),
-                new Claim(ClaimTypes.Role, "Admin"),
-                new Claim(ClaimTypes.Role, "User"),
-                new Claim(ClaimTypes.Role, "Doctor"),
-                new Claim(ClaimTypes.Role, "Inspector")
+                new Claim(ClaimTypes.Name, user.Nume)
             };
+
+            foreach (var role in user.Roles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, role.ToString()));
+            }
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetSection("AppSettings:Token").Value!));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);

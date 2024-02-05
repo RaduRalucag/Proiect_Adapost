@@ -8,6 +8,7 @@ using Proiect_Adapost.Services.AdapostService;
 using Proiect_Adapost.Services.Carnet_sanatateService;
 using Proiect_Adapost.Models.Animal.Dto;
 using Proiect_Adapost.Models.Animal;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Proiect_Adapost.Controllers
 {
@@ -25,6 +26,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<IEnumerable<Carnet_sanatateResponseDto>>> GetAllCarnet_sanatate()
         {
             var carnete_sanatate = await _carnet_sanatateService.GetAllCarnet_sanatate();
@@ -33,6 +35,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpGet("{id:guid}")]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<Carnet_sanatateResponseDto>> GetCarnet_sanatateById(Guid id)
         {
             var carnete_sanatate = await _carnet_sanatateService.GetAnimal(id);
@@ -40,6 +43,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpPost("animal/{animalId:guid}")]
+        [Authorize(Roles = "Admin, Doctor")]
         public async Task<ActionResult<Carnet_sanatateResponseDto>> CreateCarnet_sanatate(Guid animalId, Carnet_sanatateRequestDto carnet_sanatate)
         {
             var _carnet_sanatate = _mapper.Map<Carnet_sanatate>(carnet_sanatate);
@@ -49,6 +53,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpDelete("{id:guid}")]
+        [Authorize(Roles = "Admin, Doctor")]
         public async Task<ActionResult<Carnet_sanatateResponseDto>> DeleteCarnet_sanatate(Guid id)
         {
             var carnet_sanatate = await _carnet_sanatateService.GetCarnet_sanatateById(id);
@@ -58,6 +63,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpPut("{id:guid}")]
+        [Authorize(Roles = "Admin, Doctor")]
         public async Task<ActionResult<Carnet_sanatateResponseDto>> UpdateCarnet_sanatate(Guid id, Carnet_sanatateRequestDto carnet_sanatate)
         {
             var _carnet_sanatate = await _carnet_sanatateService.GetCarnet_sanatateById(id);

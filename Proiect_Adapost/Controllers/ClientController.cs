@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Proiect_Adapost.Models.Client;
@@ -24,6 +25,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<IEnumerable<ClientResponseDto>>> GetClienti()
         {
             var clienti = await _clientService.GetClienti();
@@ -33,6 +35,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpGet("{id:guid}")]
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<ClientResponseDto>> GetClientById(Guid id)
         {
             var client = await _clientService.GetClientById(id);
@@ -41,6 +44,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ClientResponseDto>> CreateClient(ClientRequestDto client)
         {
             var _client = _mapper.Map<Client>(client);
@@ -50,6 +54,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpDelete("{id:guid}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ClientResponseDto>> DeleteClient(Guid id)
         {
             var client = await _clientService.GetClientById(id);
@@ -59,6 +64,7 @@ namespace Proiect_Adapost.Controllers
         }
 
         [HttpPut("{id:guid}")]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ClientResponseDto>> UpdateClient(Guid id, ClientRequestDto client)
         {
             var _client = await _clientService.GetClientById(id);

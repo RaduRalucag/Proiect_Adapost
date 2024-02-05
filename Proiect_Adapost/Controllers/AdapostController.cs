@@ -20,7 +20,8 @@ namespace Proiect_Adapost.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet, Authorize(Roles = "User")]
+        [HttpGet] 
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<AdapostResponseDto>> GetAdaposts()
         {
             var adaposts = await _adapostService.GetAdaposts();
@@ -28,14 +29,16 @@ namespace Proiect_Adapost.Controllers
             return Ok(adapostsDTO);
         }
 
-        [HttpGet("{id:guid}"), Authorize(Roles = "User")]
+        [HttpGet("{id:guid}")] 
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<AdapostResponseDto>> GetAdapostById(Guid id)
         {
             var adapost = await _adapostService.GetAdapostById(id);
             return Ok(adapost);
         }
 
-        [HttpPost("oras/{orasId:guid},conditie/{conditieId:guid}"), Authorize(Roles = "Admin")]
+        [HttpPost("oras/{orasId:guid},conditie/{conditieId:guid}")] 
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<AdapostResponseDto>> CreateAdapost(AdapostRequestDto adapost, Guid orasId, Guid conditieId)
         {
             var _adapost = _mapper.Map<Adapost>(adapost);
@@ -44,7 +47,8 @@ namespace Proiect_Adapost.Controllers
             return Ok(_adapostDTO);
         }
 
-        [HttpPut("{id:guid}"), Authorize(Roles = "Admin")]
+        [HttpPut("{id:guid}")] 
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<AdapostResponseDto>> UpdateAdapost(Guid id, AdapostRequestDto adapost)
         {
             var _adapost = await _adapostService.GetAdapostById(id);
@@ -54,7 +58,8 @@ namespace Proiect_Adapost.Controllers
             return Ok(_adapostDTO);
         }  
 
-        [HttpDelete("{id:guid}"), Authorize(Roles = "Admin")]
+        [HttpDelete("{id:guid}")] 
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<AdapostResponseDto>> DeleteAdapost(Guid id)
         {
             var adapost = await _adapostService.GetAdapostById(id);

@@ -20,7 +20,8 @@ namespace Proiect_Adapost.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet, Authorize(Roles = "User")]
+        [HttpGet] 
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<IEnumerable<ControlResponseDto>>> GetControls()
         {
             var controls = await _controlService.GetControls();
@@ -29,7 +30,8 @@ namespace Proiect_Adapost.Controllers
 
         }
 
-        [HttpGet("{id:guid}"), Authorize(Roles = "User")]
+        [HttpGet("{id:guid}")] 
+        [Authorize(Roles = "User")]
         public async Task<ActionResult<ControlResponseDto>> GetControlById(Guid id)
         {
             var control = await _controlService.GetControlById(id);
@@ -37,7 +39,8 @@ namespace Proiect_Adapost.Controllers
             return Ok(controlDTO);
         }
 
-        [HttpPost("arhiva/{arhivaId:guid},conditie/{conditieId:guid}"), Authorize(Roles = "Admin, Inspector")]
+        [HttpPost("arhiva/{arhivaId:guid},conditie/{conditieId:guid}")] 
+        [Authorize(Roles = "Admin, Inspector")]
         public async Task<ActionResult<ControlResponseDto>> CreateControl(ControlRequestDto control, Guid arhivaId, Guid conditieId)
         {
             var _control = _mapper.Map<Control>(control);
@@ -46,7 +49,8 @@ namespace Proiect_Adapost.Controllers
             return Ok(_controlDTO);
         }
 
-        [HttpPut("{id:guid}"), Authorize(Roles = "Admin, Inspector")]
+        [HttpPut("{id:guid}")] 
+        [Authorize(Roles = "Admin, Inspector")]
         public async Task<ActionResult<ControlResponseDto>> UpdateControl(Guid id, ControlRequestDto control)
         {
             var _control = await _controlService.GetControlById(id);
@@ -56,7 +60,8 @@ namespace Proiect_Adapost.Controllers
             return Ok(_controlDTO);
         }
 
-        [HttpDelete("{id:guid}"), Authorize(Roles = "Admin, Inspector")]
+        [HttpDelete("{id:guid}")] 
+        [Authorize(Roles = "Admin, Inspector")]
         public async Task<ActionResult<ControlResponseDto>> DeleteControl(Guid id)
         {
             var control = await _controlService.GetControlById(id);

@@ -4,6 +4,6 @@
     {
         public Guid Id { get; set; }
         public string Denumire { get; set; }
-        public string Gravitate { get; set; }
+        public int Gravitate { get; set; }
     }
 }
