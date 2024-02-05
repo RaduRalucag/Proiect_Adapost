@@ -50,7 +50,7 @@ namespace Proiect_Adapost.Controllers
                 return Ok(_orasDTO);
             }
 
-            [HttpPost("{id:guid}")] 
+            [HttpPut("{id:guid}")] 
             [Authorize(Roles = "Admin")]
             public async Task<ActionResult<OrasResponseDto>> UpdateOras(Guid id, OrasRequestDto oras)
         {

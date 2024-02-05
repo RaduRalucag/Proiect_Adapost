@@ -7,7 +7,7 @@ namespace Proiect_Adapost.Models.Carnet_sanatate
         public string Vaccin { get; set; }
         public string Varsta { get; set; }
 
-        public Guid AnimalId { get; set; }
-        public Animal.Animal Animal { get; set; }
+        public Guid? AnimalId { get; set; }
+        public Animal.Animal? Animal { get; set; }
     }
 }

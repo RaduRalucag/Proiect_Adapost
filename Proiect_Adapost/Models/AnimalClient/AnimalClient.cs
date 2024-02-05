@@ -4,8 +4,8 @@ namespace Proiect_Adapost.Models.AnimalClient
 {
     public class AnimalClient: BaseEntity
     {
-        public Guid AnimalId { get; set; }
-        public Guid ClientId { get; set; }
+        public Guid? AnimalId { get; set; }
+        public Guid? ClientId { get; set; }
 
         public int NumarAdoptii { get; set; }
         public string DataAdoptie { get; set; }
