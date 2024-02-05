@@ -1,9 +1,12 @@
 using Examen.Helpers.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Proiect_Adapost;
 using Proiect_Adapost.Data;
 using Proiect_Adapost.Helpers;
 using Proiect_Adapost.Services.UserService;
@@ -17,6 +20,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers().AddJsonOptions(x =>
         x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 // Add services to the container.
+builder.Services.AddSignalR();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddAutoMapper(typeof(MapperProfile));
@@ -59,6 +63,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.MapPost("broadcast", async (string message, IHubContext<ChatHub, IChatClient> context) =>
+    {
+        await context.Clients.All.ReceiveMessage(message);
+        return Results.NoContent();
+    });
+
+app.MapHub<ChatHub>("chat-hub");
 
 app.UseHttpsRedirection();
 
